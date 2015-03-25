@@ -6,6 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Project for EAI (Enterprise Application Integration), SS15, TH-Wildau</description>
 	<name>jax-ws-demo</name>
+	<packaging>war</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
