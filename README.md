@@ -10,8 +10,10 @@ Demo project for EAI (Enterprise Application Integration) module.
 
 ## test
 
+- $ curl --header "content-type: text/xml" -d @request.xml http://localhost:8080/jax-ws-demo/SimpleService}
+- wsgen
 - [SoapUI](http://sourceforge.net/projects/soapui/files/soapui/)
-- curl --header "content-type: text/xml" -d @request.xml http://localhost:8080/jax-ws-demo/SimpleService}
+
 
 ## resources
 

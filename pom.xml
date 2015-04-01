@@ -9,8 +9,9 @@
 	<packaging>war</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<jee.version>7.0</jee.version>
+		<lombok.version>1.16.2</lombok.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -18,6 +19,11 @@
 			<artifactId>javaee-api</artifactId>
 			<version>${jee.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

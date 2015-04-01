@@ -1,4 +1,4 @@
-package io.ws;
+package io.ws.server;
 
 import javax.jws.WebService;
 
