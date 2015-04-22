@@ -14,8 +14,13 @@ import lombok.Getter;
  * 
  * @author s7n
  */
+<<<<<<< HEAD
 @Getter
 @XmlRootElement
+=======
+@XmlRootElement
+@Getter
+>>>>>>> 255ef0f085ce6fa883217fd99677bafe1bf16ed8
 public class AppContainer {
 
 	@XmlElement(name = "apps")
