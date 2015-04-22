@@ -5,8 +5,7 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 /**
@@ -14,8 +13,8 @@ import lombok.Setter;
  * 
  * @author s7n
  */
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 public class App {
 
 	@XmlAttribute

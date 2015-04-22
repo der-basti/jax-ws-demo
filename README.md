@@ -1,19 +1,12 @@
 # jax-ws-demo
 
-Demo project for EAI (Enterprise Application Integration) module.
+Demo project for EAI (Enterprise Application Integration) module. 2015 th-wildau.de.
 
 ## require
 
 - git
 - maven
 - java 8
-
-## test
-
-- $ curl --header "content-type: text/xml" -d @request.xml http://localhost:8080/jax-ws-demo/SimpleService}
-- wsgen
-- [SoapUI](http://sourceforge.net/projects/soapui/files/soapui/)
-
 
 ## resources
 

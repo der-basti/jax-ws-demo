@@ -12,11 +12,7 @@ import javax.jws.WebService;
 public class EchoService {
 
 	public String getHello() {
-		return getHello("World");
-	}
-
-	public String getHello(final String name) {
-		return "Hello " + name;
+		return "Hello World";
 	}
 	
 	protected void notVisible() {
