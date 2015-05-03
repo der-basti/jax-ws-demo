@@ -1,10 +1,11 @@
-package io.model;
+package io.ws.server.model;
 
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@AllArgsConstructor
 public class App {
 
 	@XmlAttribute
@@ -29,10 +31,12 @@ public class App {
 
 	private boolean activated;
 
-	private Date adddate;
+	private Date addDate;
 
 	private String checksum;
 
-	private String appdata;
+	/** URL for download */
+	//private byte[] appdata;
+	private String appUrl;
 
 }

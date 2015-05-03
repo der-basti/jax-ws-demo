@@ -1,15 +1,13 @@
 package io.ws.server;
 
-import io.model.App;
+import io.ws.server.model.App;
+import io.ws.server.model.ReturnCode;
 
 import java.util.List;
 
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
+import javax.inject.Inject;
 import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
-import javax.xml.ws.BindingType;
-import javax.xml.ws.soap.MTOM;
+import javax.validation.constraints.NotNull;
 
 /**
  * Basic app web service.
@@ -17,22 +15,70 @@ import javax.xml.ws.soap.MTOM;
  * @author s7n
  */
 @WebService
-//@MTOM
-//@BindingType(value=javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_MTOM_BINDING)
 public class AppService {
 
-	public List<App> getAll() {
-		return null;
-	}
-	
-	public void find(final String name) {
-		
+	@Inject
+	private Backend backend;
+
+	/**
+	 * App include App (name, id, description) informations.
+	 * 
+	 * @return List of {@link App}
+	 */
+	public List<App> listAll() {
+		return this.backend.findAll();
 	}
 
-	public App getAppInfo(final Long id) {
-		return new App();
+	/**
+	 * Find a specific app by id.
+	 * 
+	 * @param id
+	 *            long
+	 * @return App object id exists, else FIXME .
+	 */
+	public App getAppById(final Long id) {
+		App app = this.backend.get(id);
+		if (app != null)
+			return app;
+
+		// FIXME SOAP FAULT
+		return null;
 	}
-	public void getApp(final Long id) {
-		//
+
+	/**
+	 * Sample for MTOM.
+	 * 
+	 * @param id
+	 *            long
+	 * @return byte[] application data
+	 */
+	public byte[] getBinary(final Long id) {
+		return this.backend.getBinary(id);
+	}
+
+	/**
+	 * Update a specific application.
+	 * 
+	 * @param app
+	 *            identify by id and include all informations.
+	 * @param data
+	 *            optional byte[].
+	 * @return {@link ReturnCode}
+	 */
+	public ReturnCode update(final @NotNull App app, final byte[] data) {
+		// validierung not changed (id, addDate, checksum)
+		return this.backend.update(app.getName(), app.getDescription(),
+				app.getPrice(), data);
+	}
+
+	/**
+	 * Delete a specific application.
+	 * 
+	 * @param id
+	 *            application identifier
+	 * @return {@link ReturnCode}
+	 */
+	public ReturnCode delete(final Long id) {
+		return this.backend.delete(id);
 	}
 }

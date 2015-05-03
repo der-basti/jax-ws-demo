@@ -12,6 +12,8 @@
 		<java.version>1.8</java.version>
 		<jee.version>7.0</jee.version>
 		<lombok.version>1.16.4</lombok.version>
+		<slf4j.version>1.7.12</slf4j.version>
+		<junit.version>4.12</junit.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -24,6 +26,16 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

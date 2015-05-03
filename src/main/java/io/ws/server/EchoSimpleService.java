@@ -3,18 +3,17 @@ package io.ws.server;
 import javax.jws.WebService;
 
 /**
- * The simples JAX-WS (http://localhost:8080/jax-ws-demo/EchoService?wsdl).
+ * The simplest JAX-WS (http://localhost:8080/jax-ws-demo/EchoSimpleService?wsdl).
  * 
  * @author s7n
  */
-
 @WebService
-public class EchoService {
+public class EchoSimpleService {
 
 	public String getHello() {
 		return "Hello World";
 	}
-	
+
 	protected void notVisible() {
 		// nothing to do
 	}

@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <appContainer>
-    <apps/>
-    <apps/>
-    <apps/>
+    <apps id="1">
+        <activated>true</activated>
+        <addDate>2015-05-03T23:00:26.538+02:00</addDate>
+        <appUrl>[B@15db9742</appUrl>
+        <checksum>checksum</checksum>
+        <description>Best Terminal Emulator</description>
+        <name>Tutti Emulator</name>
+        <price>0.01</price>
+    </apps>
+    <apps id="2">
+        <activated>true</activated>
+        <addDate>2015-05-03T23:00:26.538+02:00</addDate>
+        <appUrl>[B@15db9742</appUrl>
+        <checksum>checksum</checksum>
+        <description>Sport Tracking App</description>
+        <name>StressWa</name>
+        <price>0.99</price>
+    </apps>
+    <apps id="3">
+        <activated>true</activated>
+        <addDate>2015-05-03T23:00:26.538+02:00</addDate>
+        <appUrl>[B@15db9742</appUrl>
+        <checksum>checksum</checksum>
+        <description>Ultimate Web Browser</description>
+        <name>ChroFox</name>
+        <price>0.49</price>
+    </apps>
+    <apps id="4">
+        <activated>true</activated>
+        <addDate>2015-05-03T23:00:26.538+02:00</addDate>
+        <appUrl>[B@15db9742</appUrl>
+        <checksum>checksum</checksum>
+        <description>The Game</description>
+        <name>Go!</name>
+        <price>0.25</price>
+    </apps>
 </appContainer>
