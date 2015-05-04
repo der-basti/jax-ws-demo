@@ -1,4 +1,32 @@
-<!--a href="">http://localhost:8080/jax-ws-demo/xyzService?wsdl</a-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsf/composite"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<h1>JAX-WS-DEMO - Server</h1>
 
-<a href="">http://localhost:8080/jax-ws-demo/echoService?wsdl</a>
-<a href="">http://localhost:8080/jax-ws-demo/appService?wsdl</a>
+		<a href="#{request.contextPath}/">Back</a>
+
+		<details>...
+		</details>
+
+		<ul>
+			<li><h:outputText
+					value="Current application count: #{runtimeHome.appCount}" /></li>
+			<!--li>
+				<a href="">http://localhost:8080/jax-ws-demo/xyzService?wsdl</a>
+			</li-->
+			<li><a href="">http://localhost:8080/jax-ws-demo/echoService?wsdl</a></li>
+			<li><a href="">http://localhost:8080/jax-ws-demo/appService?wsdl</a></li>
+
+		</ul>
+
+
+
+
+	</ui:define>
+</ui:composition>

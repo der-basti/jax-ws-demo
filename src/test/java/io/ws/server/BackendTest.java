@@ -19,7 +19,7 @@ public class BackendTest {
 
 	@Before
 	public void setUp() throws Exception {
-//		this.backend = new Backend();
+//		this.backend = new BackendBean();
 	}
 
 	@After

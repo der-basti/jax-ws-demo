@@ -1,92 +1,50 @@
 package io.ws.server.web;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import io.ws.server.BackendBean;
+import io.ws.server.model.App;
+import io.ws.server.model.ReturnCode;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.net.ssl.HttpsURLConnection;
 
 @Named
+@ViewScoped
 public class RuntimeHome implements Serializable {
 
 	private static final long serialVersionUID = -2955707944574962595L;
 
-	// FIXME
-	private void sendGet() throws Exception {
-		 
-		String url = "http://www.google.com/search?q=mkyong";
- 
-		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
- 
-		// optional default is GET
-		con.setRequestMethod("GET");
- 
-		//add request header
-		con.setRequestProperty("User-Agent", "USER_AGENT");
- 
-		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'GET' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
- 
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
- 
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
-		in.close();
- 
-		//print result
-		System.out.println(response.toString());
- 
+	@Inject
+	private BackendBean backendBean;
+
+	@PostConstruct
+	public void init() {
+		// this.backend.init(this.getClass().getClassLoader().getResource("data.xml").getFile());
+		 this.backendBean.init();
 	}
- 
-	// FIXME
-	// HTTP POST request
-	private void sendPost() throws Exception {
- 
-		String url = "https://selfsolve.apple.com/wcResults.do";
-		URL obj = new URL(url);
-		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
- 
-		//add reuqest header
-		con.setRequestMethod("POST");
-		con.setRequestProperty("User-Agent", "USER_AGENT");
-		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
- 
-		String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
- 
-		// Send post request
-		con.setDoOutput(true);
-		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-		wr.writeBytes(urlParameters);
-		wr.flush();
-		wr.close();
- 
-		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'POST' request to URL : " + url);
-		System.out.println("Post parameters : " + urlParameters);
-		System.out.println("Response Code : " + responseCode);
- 
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
- 
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
-		in.close();
- 
-		//print result
-		System.out.println(response.toString());
- 
+	
+	private void sample() {
+		@SuppressWarnings("unused")
+		List<App> appList = this.backendBean.findAll();
+		@SuppressWarnings("unused")
+		App app = this.backendBean.get(1L);
+		@SuppressWarnings("unused")
+		ReturnCode rc = this.backendBean.delete(2L);
+		@SuppressWarnings("unused")
+		List<App> findList = this.backendBean.find("ChroFox");
+		byte[] barray = this.backendBean.getBinary(1L);
+		// 4L, "Go!", "The Game", 0.25, activated, new Date(),
+		this.backendBean.update(4L, "The Game Go", "new description", 99.99d,
+				"newData".getBytes());
+		appList = this.backendBean.findAll();
+	}
+
+	public String getAppCount() {
+		// FIXME sample();
+		return String.valueOf(this.backendBean.findAll().size());
 	}
 }

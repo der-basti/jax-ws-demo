@@ -19,11 +19,14 @@ public class ModelGenerator {
 	public static final String RESOURCE_FILE = "data.xml";
 
 	public static void main(String[] args) {
+		marshal(new File(RESOURCE_LOCATION + RESOURCE_FILE), getModel());
+	}
+
+	public static AppContainer getModel() {
 		final boolean activated = true;
-		
 		// FIXME
 		final byte[] appdata = "appdata".getBytes();
-		
+
 		App tutti = new App(1L, "Tutti Emulator", "Best Terminal Emulator",
 				0.01, activated, new Date(), "checksum", appdata.toString());
 		App runaway = new App(2L, "StressWa", "Sport Tracking App", 0.99,
@@ -32,8 +35,8 @@ public class ModelGenerator {
 				activated, new Date(), "checksum", appdata.toString());
 		App go = new App(4L, "Go!", "The Game", 0.25, activated, new Date(),
 				"checksum", appdata.toString());
-		marshal(new File(RESOURCE_LOCATION + RESOURCE_FILE), new AppContainer(
-				tutti, runaway, chrofox, go));
+		return new AppContainer(tutti, runaway, chrofox, go);
+
 	}
 
 	public static void marshal(final File file, final AppContainer ac) {

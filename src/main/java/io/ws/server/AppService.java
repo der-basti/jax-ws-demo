@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 public class AppService {
 
 	@Inject
-	private Backend backend;
+	private BackendBean backendBean;
 
 	/**
 	 * App include App (name, id, description) informations.
@@ -26,7 +26,7 @@ public class AppService {
 	 * @return List of {@link App}
 	 */
 	public List<App> listAll() {
-		return this.backend.findAll();
+		return this.backendBean.findAll();
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class AppService {
 	 * @return App object id exists, else FIXME .
 	 */
 	public App getAppById(final Long id) {
-		App app = this.backend.get(id);
+		App app = this.backendBean.get(id);
 		if (app != null)
 			return app;
 
@@ -53,7 +53,7 @@ public class AppService {
 	 * @return byte[] application data
 	 */
 	public byte[] getBinary(final Long id) {
-		return this.backend.getBinary(id);
+		return this.backendBean.getBinary(id);
 	}
 
 	/**
@@ -67,8 +67,8 @@ public class AppService {
 	 */
 	public ReturnCode update(final @NotNull App app, final byte[] data) {
 		// validierung not changed (id, addDate, checksum)
-		return this.backend.update(app.getName(), app.getDescription(),
-				app.getPrice(), data);
+		return this.backendBean.update(app.getId(), app.getName(),
+				app.getDescription(), app.getPrice(), data);
 	}
 
 	/**
@@ -79,6 +79,6 @@ public class AppService {
 	 * @return {@link ReturnCode}
 	 */
 	public ReturnCode delete(final Long id) {
-		return this.backend.delete(id);
+		return this.backendBean.delete(id);
 	}
 }
