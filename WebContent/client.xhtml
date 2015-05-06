@@ -1,19 +1,24 @@
-<html>
-<head>
-<!-- your choose of THE framework -->
-</head>
-<body>
-	<label for="sel">FooBar</label>
-	<f:select id="sle" value="" type="">
-		<f:selectItems value="" />
-	</f:select>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsf/composite"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<h1>JAX-WS-DEMO - Client</h1>
 
-	<hr />
+		<a href="#{request.contextPath}/">Back</a>
 
-	INPUT
-	<TEXTAREA rows="10" cols="12"></TEXTAREA>
-	
-	RETURN
-	<TEXTAREA rows="10" cols="12"></TEXTAREA>
-</body>
-</html>
+		<details>...
+		</details>
+
+		<ul>
+			<li><a href="clientJava.xhtml">Java Client</a></li>
+			<li><a href="clientJavascript.xhtml">JavaScript Client</a></li>
+
+		</ul>
+
+	</ui:define>
+</ui:composition>
