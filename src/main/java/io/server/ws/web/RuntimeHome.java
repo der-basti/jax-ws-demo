@@ -1,10 +1,12 @@
-package io.ws.server.web;
+package io.server.ws.web;
 
-import io.ws.server.BackendBean;
-import io.ws.server.model.App;
-import io.ws.server.model.ReturnCode;
+import io.server.ws.BackendBean;
+import io.server.ws.model.App;
+import io.server.ws.model.ReturnCode;
 
 import java.io.Serializable;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,11 +14,16 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Named
 @ViewScoped
 public class RuntimeHome implements Serializable {
 
 	private static final long serialVersionUID = -2955707944574962595L;
+
+	private Logger log = LoggerFactory.getLogger(RuntimeHome.class);
 
 	@Inject
 	private BackendBean backendBean;
@@ -24,17 +31,14 @@ public class RuntimeHome implements Serializable {
 	@PostConstruct
 	public void init() {
 		// this.backend.init(this.getClass().getClassLoader().getResource("data.xml").getFile());
-		 this.backendBean.init();
+		this.backendBean.init();
 	}
-	
+
+	@SuppressWarnings("unused")
 	private void sample() {
-		@SuppressWarnings("unused")
 		List<App> appList = this.backendBean.findAll();
-		@SuppressWarnings("unused")
 		App app = this.backendBean.get(1L);
-		@SuppressWarnings("unused")
 		ReturnCode rc = this.backendBean.delete(2L);
-		@SuppressWarnings("unused")
 		List<App> findList = this.backendBean.find("ChroFox");
 		byte[] barray = this.backendBean.getBinary(1L);
 		// 4L, "Go!", "The Game", 0.25, activated, new Date(),
@@ -44,7 +48,17 @@ public class RuntimeHome implements Serializable {
 	}
 
 	public String getAppCount() {
-		// FIXME sample();
+		// TODO 
+		// sample();
 		return String.valueOf(this.backendBean.findAll().size());
+	}
+
+	public String getIp() {
+		try {
+			return InetAddress.getLocalHost().getHostAddress();
+		} catch (final UnknownHostException e) {
+			this.log.error(e.getMessage(), e);
+			return "unknown host";
+		}
 	}
 }

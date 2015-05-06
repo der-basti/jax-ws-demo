@@ -28,7 +28,7 @@ public class BackendTest {
 
 	@Test
 	public void listApps() {
-//		List<App> list = this.backend.findAll();
+//		List<AppService> list = this.backend.findAll();
 //		// FIXME
 //		assertEquals("The adressBook should contain 1 contact", 1, list.size());
 	}

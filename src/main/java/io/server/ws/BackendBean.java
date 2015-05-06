@@ -1,9 +1,9 @@
-package io.ws.server;
+package io.server.ws;
 
-import io.ws.server.model.App;
-import io.ws.server.model.AppContainer;
-import io.ws.server.model.ModelGenerator;
-import io.ws.server.model.ReturnCode;
+import io.server.ws.model.App;
+import io.server.ws.model.AppContainer;
+import io.server.ws.model.ModelGenerator;
+import io.server.ws.model.ReturnCode;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
-import javax.xml.ws.soap.MTOM;
 
 /**
  * The one and only backend bean.
@@ -28,25 +27,32 @@ public class BackendBean implements Serializable {
 
 	private AppContainer appContainer;
 
-	public BackendBean() {
-		// init(RESOURCE_LOCATION + RESOURCE_FILE);
-	}
-
 	/**
 	 * Re-/load the sample/demo application container.
 	 */
 	@PostConstruct
 	public void init() {
-		// this.appContainer = ModelGenerator.unmarshal(new File(source));
 		this.appContainer = ModelGenerator.getModel();
 	}
 
+	/**
+	 * Find all available applications.
+	 * 
+	 * @return {@link AppService} list
+	 */
 	public List<App> findAll() {
 		return this.appContainer.getApps().stream()
 				.filter(e -> e.isActivated())
 				.collect(Collectors.<App> toList());
 	}
 
+	/**
+	 * Find a application by name.
+	 * 
+	 * @param name
+	 *            string
+	 * @return {@link AppService} list
+	 */
 	public List<App> find(final String name) {
 		return this.appContainer.getApps().stream()
 				.filter(e -> e.getName().equalsIgnoreCase(name))
@@ -58,7 +64,7 @@ public class BackendBean implements Serializable {
 	 * 
 	 * @param id
 	 *            Long
-	 * @return {@link App} or null
+	 * @return {@link AppService} or null
 	 */
 	public App get(final Long id) {
 		return this.appContainer.getApps().stream().findFirst()
@@ -71,13 +77,13 @@ public class BackendBean implements Serializable {
 	 * @param id
 	 * @return byte[] or null;
 	 */
-	@MTOM
+	// TODO @MTOM
 	public byte[] getBinary(Long id) {
 		App app = get(id);
 		if (app == null) {
 			return null;
 		}
-		// FIXME open url and send ...
+		// TODO open url and send binary
 		return app.getAppUrl().getBytes();
 	}
 
@@ -106,7 +112,7 @@ public class BackendBean implements Serializable {
 				app.setDescription(description);
 				app.setName(name);
 				app.setPrice(price);
-				// FIXME
+				// TODO update app
 				// app.setAppUrl(appUrl);
 				// app.setChecksum(checksum);
 				return ReturnCode.SUCCESS;
@@ -122,9 +128,8 @@ public class BackendBean implements Serializable {
 	 * @return
 	 */
 	public ReturnCode delete(final Long id) {
-		App app = this.appContainer.getApps().stream().findFirst()
-				.filter(e -> e.getId().equals(id)).orElse(null);
-		// FIXME
+		App app = this.appContainer.getApps().stream()
+				.filter(e -> e.getId().equals(id)).findFirst().orElse(null);
 		if (app == null) {
 			return ReturnCode.OBJECT_NOT_FOUND;
 		}

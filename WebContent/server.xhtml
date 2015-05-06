@@ -11,18 +11,29 @@
 
 		<a href="#{request.contextPath}/">Back</a>
 
-		<details>...
+		<details>Host IP: #{runtimeHome.ip}
 		</details>
 
 		<ul>
-			<li><h:outputText
-					value="Current application count: #{runtimeHome.appCount}" /></li>
 			<!--li>
-				<a href="">http://localhost:8080/jax-ws-demo/xyzService?wsdl</a>
+				<a href="">http://localhost:8080#{request.contextPath}/xyzService?wsdl</a>
 			</li-->
-			<li><a href="">http://localhost:8080/jax-ws-demo/echoService?wsdl</a></li>
-			<li><a href="">http://localhost:8080/jax-ws-demo/appService?wsdl</a></li>
-
+			<li>Samples
+				<ul>
+					<li><a href="#{request.contextPath}/EchoSimpleService?wsdl"
+						target="_blank">EchoSimpleService?wsdl</a></li>
+					<li><a href="#{request.contextPath}/EchoComplexService?wsdl"
+						target="_blank">EchoComplexService?wsdl</a></li>
+				</ul>
+			</li>
+			<li>Application Store Demo
+				<ul>
+					<li><h:outputText
+							value="Current application count: #{runtimeHome.appCount}" /></li>
+					<li><a href="#{request.contextPath}/AppService?wsdl"
+						target="_blank">AppService?wsdl</a></li>
+				</ul>
+			</li>
 		</ul>
 
 
