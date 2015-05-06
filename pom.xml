@@ -16,7 +16,7 @@
 		<junit.version>4.12</junit.version>
 	</properties>
 	<dependencies>
-		<dependency>
+	 <dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>${jee.version}</version>
@@ -61,6 +61,16 @@
 				<configuration>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+				 <webResources>
+				  <resource>
+				   <directory>src</directory>
+				   <targetPath>WEB-INF</targetPath>
+				   <includes>
+				    <include>jax-ws-catalog.xml</include>
+				    <include>wsdl/**</include>
+				   </includes>
+				  </resource>
+				 </webResources>
 				</configuration>
 			</plugin>
 		</plugins>
