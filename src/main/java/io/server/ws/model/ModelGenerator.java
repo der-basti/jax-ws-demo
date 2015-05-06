@@ -1,4 +1,4 @@
-package io.ws.server.model;
+package io.server.ws.model;
 
 import java.io.File;
 import java.util.Date;
@@ -29,7 +29,7 @@ public class ModelGenerator {
 
 		App tutti = new App(1L, "Tutti Emulator", "Best Terminal Emulator",
 				0.01, activated, new Date(), "checksum", appdata.toString());
-		App runaway = new App(2L, "StressWa", "Sport Tracking App", 0.99,
+		App runaway = new App(2L, "StressWa", "Sport Tracking AppService", 0.99,
 				activated, new Date(), "checksum", appdata.toString());
 		App chrofox = new App(3L, "ChroFox", "Ultimate Web Browser", 0.49,
 				activated, new Date(), "checksum", appdata.toString());

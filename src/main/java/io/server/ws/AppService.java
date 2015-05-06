@@ -1,7 +1,7 @@
-package io.ws.server;
+package io.server.ws;
 
-import io.ws.server.model.App;
-import io.ws.server.model.ReturnCode;
+import io.server.ws.model.App;
+import io.server.ws.model.ReturnCode;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ public class AppService {
 	private BackendBean backendBean;
 
 	/**
-	 * App include App (name, id, description) informations.
+	 * AppService include AppService (name, id, description) informations.
 	 * 
-	 * @return List of {@link App}
+	 * @return List of {@link AppService}
 	 */
 	public List<App> listAll() {
 		return this.backendBean.findAll();
@@ -34,13 +34,13 @@ public class AppService {
 	 * 
 	 * @param id
 	 *            long
-	 * @return App object id exists, else FIXME .
+	 * @return AppService object id exists, else FIXME
 	 */
 	public App getAppById(final Long id) {
-		App app = this.backendBean.get(id);
-		if (app != null)
+		final App app = this.backendBean.get(id);
+		if (app != null) {
 			return app;
-
+		}
 		// FIXME SOAP FAULT
 		return null;
 	}

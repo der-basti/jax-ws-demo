@@ -1,4 +1,4 @@
-package io.ws.server.model;
+package io.server.ws.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
