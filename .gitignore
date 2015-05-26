@@ -1,3 +1,9 @@
+jax-ws.xml
+jaxws-build.xml
+jax-ws-catalog.xml
+catalog.xml
+wsdl
+
 # Created by https://www.gitignore.io
 
 ### Java ###
