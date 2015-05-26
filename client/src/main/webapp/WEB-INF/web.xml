@@ -49,22 +49,37 @@
     <!-- security roles used by this web application -->
     <!--security-role> <role-name>FOO</role-name> </security-role -->
     <!--security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Https entire WebApp</web-resource-name>
-			<url-pattern>/*</url-pattern>
-		</web-resource-collection>
-		< No Auth Contraint! >
-		<user-data-constraint>
-			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
-		</user-data-constraint>
-	</security-constraint-->
+            <web-resource-collection>
+                    <web-resource-name>Https entire WebApp</web-resource-name>
+                    <url-pattern>/*</url-pattern>
+            </web-resource-collection>
+            < No Auth Contraint! >
+            <user-data-constraint>
+                    <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+            </user-data-constraint>
+    </security-constraint-->
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
         <welcome-file>home.xhtml</welcome-file>
     </welcome-file-list>
-    <!--error-page> <error-code>403</error-code> <location>/WEB-INF/error.jsf</location> 
-		</error-page> <error-page> <error-code>404</error-code> <location>/WEB-INF/error.jsf</location> 
-		</error-page> <error-page> <error-code>500</error-code> <location>/WEB-INF/error.jsf</location> 
-		</error-page> <error-page> <exception-type>java.lang.Exception</exception-type> 
-		<location>/WEB-INF/error.jsf</location> </error-page -->
+<!--    <error-page> 
+        <error-code>403</error-code> 
+        <location>/WEB-INF/error.jsf</location> 
+    </error-page> 
+    <error-page> 
+        <error-code>404</error-code> 
+        <location>/WEB-INF/error.jsf</location> 
+    </error-page> 
+    <error-page> 
+        <error-code>500</error-code> 
+        <location>/WEB-INF/error.jsf</location> 
+    </error-page> 
+    <error-page> 
+        <exception-type>java.lang.Exception</exception-type> 
+        <location>/WEB-INF/error.jsf</location> 
+    </error-page>-->
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/WEB-INF/error.xhtml</location>
+    </error-page>
 </web-app>

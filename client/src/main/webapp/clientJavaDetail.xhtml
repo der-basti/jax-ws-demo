@@ -21,7 +21,7 @@
         </f:metadata>    
 
         <h1>JAX-WS-DEMO - Client - Java - Detail</h1>
-        <h:form>
+        <h:form id="detailForm">
             <a href="#{request.contextPath}/">Back</a>
             <h:panelGrid columns="2">
                 <h:outputText value="Id"/>
@@ -61,7 +61,10 @@
                                     <h:link value="Delete" outcome="appDetails">
                                         <f:param name="id" value="-1" />
                                     </h:link>-->
+                <h:commandButton value="Create/Update" action="#{appDetail.update}"/>
             </h:panelGrid>
         </h:form>
+        
+        <h:outputText value="#{appDetail.output}" />
     </ui:define>
 </ui:composition>

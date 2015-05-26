@@ -8,13 +8,9 @@ package io.jax.ws.demo.client;
 import io.server.ws.App;
 import io.server.ws.AppService;
 import io.server.ws.AppServiceService;
-import java.awt.Image;
 import javax.annotation.ManagedBean;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
-import javax.jws.soap.SOAPBinding;
-import javax.xml.ws.BindingProvider;
 import javax.xml.ws.soap.MTOMFeature;
 
 /**
@@ -30,6 +26,16 @@ public class AppDetail {
 
     public long getId() {
         return id;
+    }
+    
+    private String output;
+
+    public String getOutput() {
+        return output;
+    }
+
+    public void setOutput(String output) {
+        this.output = output;
     }
     
     public void setId(long id) {
@@ -78,6 +84,23 @@ public class AppDetail {
         //Image img = appServicePort.downloadImage(this.id);
         
         return base64Image;
+    }
+    
+    public void update(){      
+        // update
+        System.out.println("updating item");
+        
+        this.output ="success...";
+//        if(id!=-1L){
+//            System.out.println("updating item");
+//        }
+//        // create
+//        else{
+//            System.out.println("creating item");
+//            this.id = -1;
+//        }
+//        
+//        appServicePort.update(this.app, new byte[10]);
     }
         
      /** Get service port stub for App web service. */
