@@ -3,8 +3,6 @@ package io.server.ws.model;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.UUID;
 
@@ -31,14 +29,13 @@ public class ModelGenerator {
 
 	public static AppContainer getModel() {
 		try {
-			final Image img = ImageIO.read(new File("/Users/s7n/Dropbox/"
-					+ RESOURCE_IMAGE));
+			final Image img = ImageIO.read(new File(ModelGenerator.class
+					.getClassLoader().getResource(RESOURCE_IMAGE).getFile()));
 			final boolean activated = true;
 			final String appUrl = "/apps/" + UUID.randomUUID() + ".app";
-			final String checksum = "foobar"; 
-					// FIXME MessageDigest.getInstance("MD5").digest(appUrl.getBytes()).toString();
-			App tutti = new App(1L, "Tutti", "Best Terminal Emulator",
-					0.01, activated, new Date(), appUrl, checksum, img);
+			final String checksum = UUID.randomUUID().toString();
+			App tutti = new App(1L, "Tutti", "Best Terminal Emulator", 0.01,
+					activated, new Date(), appUrl, checksum, img);
 			App runaway = new App(2L, "StressWa", "Sport Tracking AppService",
 					0.99, activated, new Date(), appUrl, checksum, img);
 			App chrofox = new App(3L, "ChroFox", "Ultimate Web Browser", 0.49,
@@ -58,7 +55,6 @@ public class ModelGenerator {
 			JAXBContext jaxbContext = JAXBContext
 					.newInstance(AppContainer.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-			// pretty output
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			jaxbMarshaller.marshal(ac, file);
 		} catch (final JAXBException e) {

@@ -10,11 +10,13 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+import javax.swing.ImageIcon;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,23 +85,11 @@ public class BackendBean implements Serializable {
 	}
 
 	/**
-	 * Get application data by id.
+	 * Get application image by id.
 	 * 
 	 * @param id
 	 * @return byte[] or null;
 	 */
-	// TODO @MTOM
-//	@Deprecated
-//	public byte[] getBinary(Long id) {
-//		log("get binary by id", id);
-//		App app = get(id);
-//		if (app == null) {
-//			return null;
-//		}
-//		// TODO open url and send binary
-//		return app.getAppUrl().getBytes();
-//	}
-	
 	public Image getImage(final Long id) {
 		log("get image by id", id);
 		App app = get(id);
@@ -126,8 +116,7 @@ public class BackendBean implements Serializable {
 	 */
 	public ReturnCode update(final Long id, final String name,
 			final String description, final Double price) {
-		// FIXME , final byte[] data
-		log("update application", id, name, description, price); // , data
+		log("update application", id, name, description, price);
 		for (final Iterator<App> ia = this.appContainer.getApps().iterator(); ia
 				.hasNext();) {
 			App app = ia.next();
@@ -136,9 +125,30 @@ public class BackendBean implements Serializable {
 				app.setDescription(description);
 				app.setName(name);
 				app.setPrice(price);
-				// TODO update app
-				// app.setAppUrl(appUrl);
-				// app.setChecksum(checksum);
+				return ReturnCode.SUCCESS;
+			}
+		}
+		return ReturnCode.OBJECT_NOT_FOUND;
+	}
+
+	/**
+	 * Update application image.
+	 * 
+	 * @param id
+	 *            long
+	 * @param image
+	 *            byte array
+	 * @return {@link ReturnCode}
+	 */
+	public ReturnCode updateImage(final Long id, final byte[] image) {
+		log("update application", id);
+		for (final Iterator<App> ia = this.appContainer.getApps().iterator(); ia
+				.hasNext();) {
+			App app = ia.next();
+			if (app.getId() == id) {
+				app.setImage(new ImageIcon(image).getImage());
+				app.setAppUrl("/apps/" + UUID.randomUUID() + ".app");
+				app.setChecksum(UUID.randomUUID().toString());
 				return ReturnCode.SUCCESS;
 			}
 		}

@@ -7,11 +7,16 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
-		
+
 		<h1>JAX-WS-DEMO - Server</h1>
-		
-		<details>This demo application describes an very simple
-			application store. Host IP: #{runtimeHome.ip}
+
+		<details>
+			<p>
+				This demo application describes an very simple application store.
+				Host IP:
+				<h:outputText value="#{runtimeHome.ip}" />
+			</p>
+
 		</details>
 
 		<ul>

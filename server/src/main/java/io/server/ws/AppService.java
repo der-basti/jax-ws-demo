@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
  */
 @WebService
 @MTOM
-// http://www.mkyong.com/webservices/jax-ws/jax-ws-attachment-with-mtom/
 public class AppService {
 
 	private Logger log = LoggerFactory.getLogger(AppService.class);
@@ -58,11 +57,11 @@ public class AppService {
 	}
 
 	/**
-	 * Sample for MTOM.
+	 * Get application image (MTOM).
 	 * 
 	 * @param id
 	 *            long
-	 * @return byte[] application data
+	 * @return byte[] image data
 	 */
 	public Image downloadImage(final Long id) {
 		log("downloadImage", id);
@@ -74,13 +73,13 @@ public class AppService {
 	 * @param image
 	 * @return
 	 */
-	public String uploadImage(final Long id, final Image image) {
+	public ReturnCode uploadImage(final Long id, final Image image) {
 		log("uploadImage", id);
 		if (image == null) {
-			return "failed";
+			return ReturnCode.OBJECT_NOT_FOUND;
 		}
 		// do magic
-		return "success";
+		return ReturnCode.SUCCESS;
 	}
 
 	/**
@@ -88,16 +87,14 @@ public class AppService {
 	 * 
 	 * @param app
 	 *            identify by id and include all informations.
-	 * @param data
-	 *            optional byte[].
 	 * @return {@link ReturnCode}
 	 */
 	@Deprecated
-	public ReturnCode update(final @NotNull App app, final byte[] data) {
+	public ReturnCode update(final @NotNull App app) {
 		log("update", app.getId());
-		// validierung not changed (id, addDate, checksum)
+		// validierung not changed (id, addDate, checksum, image)
 		return this.backendBean.update(app.getId(), app.getName(),
-				app.getDescription(), app.getPrice()); // FIXME , data
+				app.getDescription(), app.getPrice());
 	}
 
 	/**

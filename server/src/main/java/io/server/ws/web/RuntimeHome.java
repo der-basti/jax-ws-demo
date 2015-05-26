@@ -30,7 +30,6 @@ public class RuntimeHome implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		// this.backend.init(this.getClass().getClassLoader().getResource("data.xml").getFile());
 		this.backendBean.init();
 	}
 
@@ -40,16 +39,13 @@ public class RuntimeHome implements Serializable {
 		App app = this.backendBean.get(1L);
 		ReturnCode rc = this.backendBean.delete(2L);
 		List<App> findList = this.backendBean.find("ChroFox");
-		//byte[] barray = this.backendBean.getBinary(1L);
+		// byte[] barray = this.backendBean.getBinary(1L);
 		// 4L, "Go!", "The Game", 0.25, activated, new Date(),
-		this.backendBean.update(4L, "The Game Go", "new description", 99.99d
-				); // "newData".getBytes()
+		this.backendBean.update(4L, "The Game Go", "new description", 99.99d);
 		appList = this.backendBean.findAll();
 	}
 
 	public String getAppCount() {
-		// TODO 
-		// sample();
 		return String.valueOf(this.backendBean.findAll().size());
 	}
 
