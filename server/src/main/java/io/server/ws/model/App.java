@@ -1,5 +1,6 @@
 package io.server.ws.model;
 
+import java.awt.Image;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -33,10 +34,10 @@ public class App {
 
 	private Date addDate;
 
-	private String checksum;
-
-	/** URL for download */
-	//private byte[] appdata;
 	private String appUrl;
+	
+	private String checksum;
+	
+	private Image image;
 
 }
