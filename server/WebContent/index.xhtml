@@ -7,13 +7,33 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
-		<h1>JAX-WS-DEMO</h1>
+		
+		<h1>JAX-WS-DEMO - Server</h1>
+		
 		<details>This demo application describes an very simple
-			application store.
+			application store. Host IP: #{runtimeHome.ip}
 		</details>
+
 		<ul>
-			<li><a href="server.xhtml">server</a></li>
-			<li><a href="client.xhtml">client</a></li>
+			<!--li>
+				<a href="">http://localhost:8080#{request.contextPath}/xyzService?wsdl</a>
+			</li-->
+			<li>Samples
+				<ul>
+					<li><a href="#{request.contextPath}/EchoSimpleService?wsdl"
+						target="_blank">EchoSimpleService?wsdl</a></li>
+					<li><a href="#{request.contextPath}/EchoComplexService?wsdl"
+						target="_blank">EchoComplexService?wsdl</a></li>
+				</ul>
+			</li>
+			<li>Application Store Demo
+				<ul>
+					<li><h:outputText
+							value="Current application count: #{runtimeHome.appCount}" /></li>
+					<li><a href="#{request.contextPath}/AppService?wsdl"
+						target="_blank">AppService?wsdl</a></li>
+				</ul>
+			</li>
 		</ul>
 	</ui:define>
 </ui:composition>

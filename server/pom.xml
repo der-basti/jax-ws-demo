@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io</groupId>
-	<artifactId>jax-ws-demo</artifactId>
+	<artifactId>jax-ws-demo-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Project for EAI (Enterprise Application Integration), SS15, TH-Wildau</description>
-	<name>jax-ws-demo</name>
+	<name>jax-ws-demo-server</name>
 	<packaging>war</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
