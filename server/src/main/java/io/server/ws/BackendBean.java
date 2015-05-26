@@ -5,7 +5,9 @@ import io.server.ws.model.AppContainer;
 import io.server.ws.model.ModelGenerator;
 import io.server.ws.model.ReturnCode;
 
+import java.awt.Image;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +15,9 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The one and only backend bean.
@@ -25,6 +30,8 @@ public class BackendBean implements Serializable {
 
 	private static final long serialVersionUID = -3921199152183955121L;
 
+	private Logger log = LoggerFactory.getLogger(BackendBean.class);
+
 	private AppContainer appContainer;
 
 	/**
@@ -32,6 +39,7 @@ public class BackendBean implements Serializable {
 	 */
 	@PostConstruct
 	public void init() {
+		log("initialize backend");
 		this.appContainer = ModelGenerator.getModel();
 	}
 
@@ -41,6 +49,7 @@ public class BackendBean implements Serializable {
 	 * @return {@link AppService} list
 	 */
 	public List<App> findAll() {
+		log("find all applcations");
 		return this.appContainer.getApps().stream()
 				.filter(e -> e.isActivated())
 				.collect(Collectors.<App> toList());
@@ -54,6 +63,7 @@ public class BackendBean implements Serializable {
 	 * @return {@link AppService} list
 	 */
 	public List<App> find(final String name) {
+		log("find applications by name", name);
 		return this.appContainer.getApps().stream()
 				.filter(e -> e.getName().equalsIgnoreCase(name))
 				.collect(Collectors.<App> toList());
@@ -67,6 +77,7 @@ public class BackendBean implements Serializable {
 	 * @return {@link AppService} or null
 	 */
 	public App get(final Long id) {
+		log("get application by id", id);
 		return this.appContainer.getApps().stream().findFirst()
 				.filter(e -> e.getId() == id).orElse(null);
 	}
@@ -78,13 +89,24 @@ public class BackendBean implements Serializable {
 	 * @return byte[] or null;
 	 */
 	// TODO @MTOM
-	public byte[] getBinary(Long id) {
+//	@Deprecated
+//	public byte[] getBinary(Long id) {
+//		log("get binary by id", id);
+//		App app = get(id);
+//		if (app == null) {
+//			return null;
+//		}
+//		// TODO open url and send binary
+//		return app.getAppUrl().getBytes();
+//	}
+	
+	public Image getImage(final Long id) {
+		log("get image by id", id);
 		App app = get(id);
 		if (app == null) {
 			return null;
 		}
-		// TODO open url and send binary
-		return app.getAppUrl().getBytes();
+		return app.getImage();
 	}
 
 	/**
@@ -103,7 +125,9 @@ public class BackendBean implements Serializable {
 	 * @return {@link ReturnCode}
 	 */
 	public ReturnCode update(final Long id, final String name,
-			final String description, final Double price, final byte[] data) {
+			final String description, final Double price) {
+		// FIXME , final byte[] data
+		log("update application", id, name, description, price); // , data
 		for (final Iterator<App> ia = this.appContainer.getApps().iterator(); ia
 				.hasNext();) {
 			App app = ia.next();
@@ -128,6 +152,7 @@ public class BackendBean implements Serializable {
 	 * @return
 	 */
 	public ReturnCode delete(final Long id) {
+		log("delete application", id);
 		App app = this.appContainer.getApps().stream()
 				.filter(e -> e.getId().equals(id)).findFirst().orElse(null);
 		if (app == null) {
@@ -135,5 +160,9 @@ public class BackendBean implements Serializable {
 		}
 		app.setActivated(false);
 		return ReturnCode.SUCCESS;
+	}
+
+	private void log(final String message, final Object... parameter) {
+		this.log.info(message + " : " + Arrays.toString(parameter));
 	}
 }
