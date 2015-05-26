@@ -8,10 +8,14 @@ package io.jax.ws.demo.client;
 import io.server.ws.App;
 import io.server.ws.AppService;
 import io.server.ws.AppServiceService;
+import java.awt.Image;
 import javax.annotation.ManagedBean;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.jws.soap.SOAPBinding;
+import javax.xml.ws.BindingProvider;
+import javax.xml.ws.soap.MTOMFeature;
 
 /**
  *
@@ -47,6 +51,10 @@ public class AppDetail {
      */
     public AppDetail() {
         appServicePort = this.getAppServicePort();
+        //codes enable MTOM in client
+//        BindingProvider bp = (BindingProvider) appServicePort;
+//        SOAPBinding binding = (SOAPBinding) bp.getBinding();
+//        binding.setMTOMEnabled(true);
     } 
  
     public String loadApp() {
@@ -64,9 +72,17 @@ public class AppDetail {
         return addDate;
     }
     
+    public String getImageAsBase64(){
+        String base64Image = "";
+                
+        //Image img = appServicePort.downloadImage(this.id);
+        
+        return base64Image;
+    }
+        
      /** Get service port stub for App web service. */
     private AppService getAppServicePort() {
         AppServiceService service = new AppServiceService();
-        return service.getAppServicePort();
+        return service.getAppServicePort(new MTOMFeature(true, 10240));
     }
 }

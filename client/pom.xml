@@ -86,8 +86,8 @@
                         <configuration>
                             <wsdlUrls>
                                 <wsdlUrl>
-                                    http://localhost:8080/jax-ws-demo/AppService?wsdl
-                                    <!--                       http://localhost:8080/jax-ws-demo/EchoSimpleService?wsdl-->
+<!--                                    http://localhost:8080/jax-ws-demo/AppService?wsdl-->
+                                    http://10.220.6.42:8080/jax-ws-demo/AppService?wsdl
                                 </wsdlUrl>
                             </wsdlUrls>
                             <!--                            <staleFile>${project.build.directory}/jaxws/stale/CalculatorService.stale</staleFile>-->
