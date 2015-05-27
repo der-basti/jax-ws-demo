@@ -23,6 +23,10 @@ public class ModelGenerator {
 	public static final String RESOURCE_FILE = "data.xml";
 	public static final String RESOURCE_IMAGE = "th-wildau-logo-500px-breit.png";
 
+	public static String generateAppUrl() {
+		return "/app/" + UUID.randomUUID() + ".app";
+	}
+
 	public static void main(String[] args) {
 		marshal(new File(RESOURCE_LOCATION + RESOURCE_FILE), getModel());
 	}
@@ -32,7 +36,7 @@ public class ModelGenerator {
 			final Image img = ImageIO.read(new File(ModelGenerator.class
 					.getClassLoader().getResource(RESOURCE_IMAGE).getFile()));
 			final boolean activated = true;
-			final String appUrl = "/apps/" + UUID.randomUUID() + ".app";
+			final String appUrl = generateAppUrl();
 			final String checksum = UUID.randomUUID().toString();
 			App tutti = new App(1L, "Tutti", "Best Terminal Emulator", 0.01,
 					activated, new Date(), appUrl, checksum, img);

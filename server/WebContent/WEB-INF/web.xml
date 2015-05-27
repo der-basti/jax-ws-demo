@@ -3,8 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
-	<description>recruiter (web application security) project</description>
-
 	<context-param>
 		<description>
             "Development" enables better error messages, including in the client side JavaScript, at the cost of performance.
@@ -18,11 +16,6 @@
 		<description>Send only the viewstate id to the client and keep the full state on the server.</description>
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
 		<param-value>server</param-value>
-	</context-param>
-	<context-param>
-		<description>http://jdevelopment.nl/jsf-22/#1127</description>
-		<param-name>javax.faces.SERIALIZE_SERVER_STATE</param-name>
-		<param-value>false</param-value>
 	</context-param>
 	<context-param>
 		<description>enables the JSF implementation to treat empty strings as null - http://docs.oracle.com/javaee/6/tutorial/doc/gircz.html, http://stackoverflow.com/a/7548821</description>
@@ -57,26 +50,13 @@
 	<!-- security roles used by this web application -->
 	<!--security-role> <role-name>FOO</role-name> </security-role -->
 
-	<!--security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Https entire WebApp</web-resource-name>
-			<url-pattern>/*</url-pattern>
-		</web-resource-collection>
-		< No Auth Contraint! >
-		<user-data-constraint>
-			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
-		</user-data-constraint>
-	</security-constraint-->
+	<!--security-constraint> <web-resource-collection> <web-resource-name>Https 
+		entire WebApp</web-resource-name> <url-pattern>/*</url-pattern> </web-resource-collection> 
+		< No Auth Contraint! > <user-data-constraint> <transport-guarantee>CONFIDENTIAL</transport-guarantee> 
+		</user-data-constraint> </security-constraint -->
 
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
-		<welcome-file>home.xhtml</welcome-file>
 	</welcome-file-list>
-
-	<!--error-page> <error-code>403</error-code> <location>/WEB-INF/error.jsf</location> 
-		</error-page> <error-page> <error-code>404</error-code> <location>/WEB-INF/error.jsf</location> 
-		</error-page> <error-page> <error-code>500</error-code> <location>/WEB-INF/error.jsf</location> 
-		</error-page> <error-page> <exception-type>java.lang.Exception</exception-type> 
-		<location>/WEB-INF/error.jsf</location> </error-page -->
 
 </web-app>

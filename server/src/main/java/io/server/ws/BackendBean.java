@@ -6,16 +6,21 @@ import io.server.ws.model.ModelGenerator;
 import io.server.ws.model.ReturnCode;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import org.slf4j.Logger;
@@ -100,7 +105,8 @@ public class BackendBean implements Serializable {
 	}
 
 	/**
-	 * Update a existing app by id.
+	 * Update a existing app by id or create a new entry, without any securty
+	 * permissions.
 	 * 
 	 * @param id
 	 *            Long
@@ -116,7 +122,8 @@ public class BackendBean implements Serializable {
 	 */
 	public ReturnCode update(final Long id, final String name,
 			final String description, final Double price) {
-		log("update application", id, name, description, price);
+		log("update/create application", id, name, description, price);
+		// update
 		for (final Iterator<App> ia = this.appContainer.getApps().iterator(); ia
 				.hasNext();) {
 			App app = ia.next();
@@ -128,7 +135,22 @@ public class BackendBean implements Serializable {
 				return ReturnCode.SUCCESS;
 			}
 		}
-		return ReturnCode.OBJECT_NOT_FOUND;
+
+		// create new entry
+		try {
+			final Image image = ImageIO.read(new File(ModelGenerator.class
+					.getClassLoader()
+					.getResource(ModelGenerator.RESOURCE_IMAGE).getFile()));
+			final String appUrl = ModelGenerator.generateAppUrl();
+			final String checksum = UUID.randomUUID().toString();
+			this.appContainer.getApps().add(
+					new App(new Random().nextLong(), name, description, price,
+							true, new Date(), appUrl, checksum, image));
+			return ReturnCode.SUCCESS;
+		} catch (final IOException e) {
+			log("can not load base image", e.getMessage());
+			return ReturnCode.INTERNAL_ERROR;
+		}
 	}
 
 	/**
