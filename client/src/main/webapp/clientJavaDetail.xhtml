@@ -16,12 +16,12 @@
 
     <ui:define name="content">
         <f:metadata>
-            <f:viewParam name="id" value="#{appDetail.id}"/>
-            <f:viewAction action="#{appDetail.loadApp()}"/>
+<!--            <f:viewParam name="id" value="#{appDetail.id}"/>
+            <f:viewAction action="#{appDetail.loadApp()}"/>-->
         </f:metadata>    
 
         <h1>JAX-WS-DEMO - Client - Java - Detail</h1>
-        <h:form id="detailForm">
+<!--        <h:form id="detailForm">
             <a href="#{request.contextPath}/">Back</a>
             <h:panelGrid columns="2">
                 <h:outputText value="Id"/>
@@ -55,16 +55,21 @@
                 </h:selectOneRadio>
 
                 Create/Update Delete
-                <!--                    <h:link value="Create/Update" outcome="appDetails">
+                                    <h:link value="Create/Update" outcome="appDetails">
                                         <f:param name="id" value="-1" />
                                     </h:link>
                                     <h:link value="Delete" outcome="appDetails">
                                         <f:param name="id" value="-1" />
-                                    </h:link>-->
-                <h:commandButton value="Create/Update" action="#{appDetail.update}"/>
+                                    </h:link>
+                <h:commandButton value="Create/Update" type="submit" action="#{appDetail.update}"/>
             </h:panelGrid>
+        </h:form>-->
+        
+        <h:form>
+            Enter your name
+            <h:inputText value="#{appDetailManagedBean.input}" />
+            <h:commandButton value="submit" action="#{appDetailManagedBean.submit()}" />
         </h:form>
         
-        <h:outputText value="#{appDetail.output}" />
     </ui:define>
 </ui:composition>
