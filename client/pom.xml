@@ -30,50 +30,6 @@
 
     <build>
         <plugins>
-<!--            <plugin>
-                <groupId>org.jvnet.jax-ws-commons</groupId>
-                <artifactId>jaxws-maven-plugin</artifactId>
-                <version>2.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>wsimport</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                                         The name of your generated source package 
-                    <packageName>io.jax.ws.demo.client.generated</packageName>
-                    <wsdlLocation>http://localhost:8080/jax-ws-demo/*</wsdlLocation>
-                    <wsdlDirectory>src/mywsdls</wsdlDirectory>
-                    <wsdlFiles>
-                        <wsdlFile>http://localhost:8080/jax-ws-demo/AppService?wsdl</wsdlFile>
-                    </wsdlFiles>
-                </configuration>
-
-        
-            </plugin>-->
-<!--            <plugin>
-         <groupId>org.codehaus.mojo</groupId>
-           <artifactId>jaxws-maven-plugin</artifactId>
-           <executions>
-             <execution>
-               <goals>
-                 <goal>wsimport</goal>
-               </goals>
-               <configuration>
-                 <wsdlUrls>
-                   <wsdlUrl>
-         http://localhost:8080/jax-ws-demo/AppService?wsdl
-                       http://localhost:8080/jax-ws-demo/EchoSimpleService?wsdl
-                   </wsdlUrl>
-                 </wsdlUrls>
-             <packageName>io.jax.ws.demo.client.generated
-             </packageName>
-               </configuration>
-             </execution>
-           </executions>
-       </plugin>-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
@@ -86,11 +42,10 @@
                         <configuration>
                             <wsdlUrls>
                                 <wsdlUrl>
-                                    http://localhost:8080/jax-ws-demo/AppService?wsdl
-<!--                                    http://10.220.6.42:8080/jax-ws-demo/AppService?wsdl-->
+                                    http://localhost:8080/jax-ws-demo-server/AppService?wsdl
+<!--                                    http://10.220.6.42:8080/jax-ws-demo-server/AppService?wsdl-->
                                 </wsdlUrl>
                             </wsdlUrls>
-                            <!--                            <staleFile>${project.build.directory}/jaxws/stale/CalculatorService.stale</staleFile>-->
                         </configuration>
                         <id>wsimport-generate-AppService</id>
                         <phase>generate-sources</phase>
