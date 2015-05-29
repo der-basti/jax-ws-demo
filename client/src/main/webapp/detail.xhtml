@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsf/composite"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="content">
+        <f:view>
+            <f:metadata>
+                <f:viewParam name="id" value="#{detailManagedBean.id}"/>
+                <f:viewAction action="#{detailManagedBean.loadApp()}"/>
+            </f:metadata>   	
+
+            <h1>JAX-WS-DEMO - Client - Detail</h1>
+            <a href="#{request.contextPath}/client.xhtml">Back</a>
+
+            <h:form> 
+
+        <h:panelGrid columns="2">
+            <h:outputText value="Id:"/>
+            <h:outputText value="#{detailManagedBean.app.id}"/>
+
+            <h:outputText value="Name:"/>
+            <h:inputText value="#{detailManagedBean.app.name}"/>
+            
+             <h:outputText value="Image"/>
+                <h:graphicImage value="#{Arrays.toString(appDetail.app.image)}"/>
+
+                <h:outputText value="Description:"/>
+                <h:inputTextarea value="#{detailManagedBean.app.description}" />
+
+                <h:outputText value="Price:"/>
+                <h:inputText value="#{detailManagedBean.app.price}"/>
+
+                <h:outputText value="AddDate:"/>
+                <h:outputText value="#{detailManagedBean.app.addDate}"/>
+
+                <h:outputText value="AppURL:"/>
+                <h:inputText value="#{detailManagedBean.app.appUrl}"/>
+                             
+                <h:outputText value="Checksum (md5sum):"/>
+                <h:outputText value="#{detailManagedBean.app.checksum}"/>
+
+                <h:outputText value="Activated:"/>
+                <h:selectOneRadio value="#{detailManagedBean.app.activated}">
+                    <f:selectItem itemLabel="true" itemValue="true"/>
+                    <f:selectItem itemLabel="false" itemValue="false"/>
+                </h:selectOneRadio>
+        </h:panelGrid>
+                <h:commandButton value="Create/Update" type="submit" action="#{detailManagedBean.update()}"/>
+                <h:commandButton value="Delete" type="submit" action="#{detailManagedBean.delete()}"/>
+        </h:form>
+            <br/><br/>
+            <h:panelGrid columns="2" rendered="#{not empty detailManagedBean.output}">
+            <h:outputText value="Output:"/><h:outputText value="#{detailManagedBean.output}"/>
+            </h:panelGrid>
+        </f:view>       
+    </ui:define>
+</ui:composition>
