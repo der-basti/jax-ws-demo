@@ -10,11 +10,11 @@ import io.server.ws.AppService;
 import io.server.ws.AppServiceService;
 import io.server.ws.ReturnCode;
 import java.io.Serializable;
-import javax.enterprise.context.RequestScoped;
+import java.util.Base64;
+import java.util.Base64.Encoder;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import javax.faces.view.ViewScoped;
 import javax.xml.ws.soap.MTOMFeature;
 
 /**
@@ -51,6 +51,16 @@ public class DetailManagedBean implements Serializable{
             this.app = appServicePort.getAppById(this.id);
         }
         return null;
+    }
+    
+    
+    public String imageAsBase64(){
+        String base64Image = "";
+               
+        Encoder encoder = Base64.getEncoder();
+        base64Image = "data:image/png;base64,"+encoder.encodeToString(this.app.getImage());
+        
+        return base64Image;
     }
     
     public String update(){
