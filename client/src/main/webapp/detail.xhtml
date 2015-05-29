@@ -18,43 +18,43 @@
 
             <h:form> 
 
-        <h:panelGrid columns="2">
-            <h:outputText value="Id:"/>
-            <h:outputText value="#{detailManagedBean.app.id}"/>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Id:"/>
+                    <h:outputText value="#{detailManagedBean.app.id}"/>
 
-            <h:outputText value="Name:"/>
-            <h:inputText value="#{detailManagedBean.app.name}"/>
-            
-             <h:outputText value="Image"/>
-                <h:graphicImage value="#{Arrays.toString(appDetail.app.image)}"/>
+                    <h:outputText value="Name:"/>
+                    <h:inputText value="#{detailManagedBean.app.name}"/>
 
-                <h:outputText value="Description:"/>
-                <h:inputTextarea value="#{detailManagedBean.app.description}" />
+                    <h:outputText value="Image"/>
+                    <h:graphicImage value="#{Arrays.toString(appDetail.app.image)}"/>
 
-                <h:outputText value="Price:"/>
-                <h:inputText value="#{detailManagedBean.app.price}"/>
+                    <h:outputText value="Description:"/>
+                    <h:inputTextarea value="#{detailManagedBean.app.description}" />
 
-                <h:outputText value="AddDate:"/>
-                <h:outputText value="#{detailManagedBean.app.addDate}"/>
+                    <h:outputText value="Price:"/>
+                    <h:inputText value="#{detailManagedBean.app.price}"/>
 
-                <h:outputText value="AppURL:"/>
-                <h:inputText value="#{detailManagedBean.app.appUrl}"/>
-                             
-                <h:outputText value="Checksum (md5sum):"/>
-                <h:outputText value="#{detailManagedBean.app.checksum}"/>
+                    <h:outputText value="AddDate:"/>
+                    <h:outputText value="#{detailManagedBean.app.addDate}"/>
 
-                <h:outputText value="Activated:"/>
-                <h:selectOneRadio value="#{detailManagedBean.app.activated}">
-                    <f:selectItem itemLabel="true" itemValue="true"/>
-                    <f:selectItem itemLabel="false" itemValue="false"/>
-                </h:selectOneRadio>
-        </h:panelGrid>
+                    <h:outputText value="AppURL:"/>
+                    <h:inputText value="#{detailManagedBean.app.appUrl}"/>
+
+                    <h:outputText value="Checksum (md5sum):"/>
+                    <h:outputText value="#{detailManagedBean.app.checksum}"/>
+
+                    <h:outputText value="Activated:"/>
+                    <h:selectOneRadio value="#{detailManagedBean.app.activated}">
+                        <f:selectItem itemLabel="true" itemValue="true"/>
+                        <f:selectItem itemLabel="false" itemValue="false"/>
+                    </h:selectOneRadio>
+                </h:panelGrid>
                 <h:commandButton value="Create/Update" type="submit" action="#{detailManagedBean.update()}"/>
                 <h:commandButton value="Delete" type="submit" action="#{detailManagedBean.delete()}"/>
-        </h:form>
+            </h:form>
             <br/><br/>
             <h:panelGrid columns="2" rendered="#{not empty detailManagedBean.output}">
-            <h:outputText value="Output:"/><h:outputText value="#{detailManagedBean.output}"/>
+                <h:outputText value="Output:"/><h:outputText value="#{detailManagedBean.output}"/>
             </h:panelGrid>
         </f:view>       
     </ui:define>
