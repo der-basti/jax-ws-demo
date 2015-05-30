@@ -73,7 +73,7 @@ public class DetailManagedBean implements Serializable{
 //appServicePort.update(app);
         
         try{
-            appServicePort.update(app);
+            appServicePort.update(app.getId(), app.getName(), app.getDescription(), app.getPrice());
         }catch(Exception e){
             
         }
