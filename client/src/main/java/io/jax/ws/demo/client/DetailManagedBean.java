@@ -23,76 +23,77 @@ import javax.xml.ws.soap.MTOMFeature;
  */
 @Named(value = "detailManagedBean")
 @SessionScoped
-public class DetailManagedBean implements Serializable{
+public class DetailManagedBean implements Serializable {
 
     private long id;
     private App app;
     private AppService appServicePort;
     private String output;
-    
+
     /**
      * Creates a new instance of DetailManagedBean
      */
     public DetailManagedBean() {
-       appServicePort = this.getAppServicePort();       
-       System.out.println("Detail Managed Bean inited!");
+        appServicePort = this.getAppServicePort();
     }
-    
-       
-    
-     /** Get service port stub for App web service. */
+
+    /**
+     * Get service port stub for App web service.
+     */
     private AppService getAppServicePort() {
         AppServiceService service = new AppServiceService();
         return service.getAppServicePort(new MTOMFeature(true, 10240));
     }
-    
+
     public String loadApp() {
-        if(id!=-1L){
+        // clear output
+        this.output = "";
+
+        if (id != -1L) {
             this.app = appServicePort.getAppById(this.id);
+        } else {
+            this.app = new App();
         }
-        return null;
-    }
-    
-    
-    public String imageAsBase64(){
-        String base64Image = "";
-               
-        Encoder encoder = Base64.getEncoder();
-        base64Image = "data:image/png;base64,"+encoder.encodeToString(this.app.getImage());
-        
-        return base64Image;
-    }
-    
-    public String update(){
-        //System.out.println("update item with id:"+this.id);
-        System.out.println("update app name: "+this.app.getName());
-        System.out.println("update app description: "+this.app.getDescription());
-        //System.out.println("app name"+app.getName());
-        //ReturnCode rC = appServicePort.update(app);
-//System.out.println("return code is:"+rC);        
-//appServicePort.update(app);
-        
-        try{
-            appServicePort.update(app.getId(), app.getName(), app.getDescription(), app.getPrice());
-        }catch(Exception e){
-            
-        }
-        
-        this.output = ReturnCode.SUCCESS.toString();
-        
-        return null;
-    }
-    
-    public String delete(){
-        ReturnCode deleteReturn = appServicePort.delete(this.id);
-        
-        this.output = "Delete returned: "+deleteReturn;
-        
         return null;
     }
 
+    public String imageAsBase64() {
+        String base64Image = "";
+        if (this.id != -1L) {
+            Encoder encoder = Base64.getEncoder();
+            base64Image = "data:image/png;base64," + encoder.encodeToString(this.app.getImage());
+        }
+        return base64Image;
+
+    }
+
+     public String create() {
+        return this.update();
+    }
     
-    /** Getter & Setter*/
+    public String update() {
+        try {
+            ReturnCode returnCode;
+            returnCode = appServicePort.update(app.getId(), app.getName(), app.getDescription(), app.getPrice());
+            this.output = returnCode.toString();
+        } catch (Exception e) {
+            this.output = "Update/Create: " + ReturnCode.INTERNAL_ERROR.toString();
+        }
+
+        return null;
+    }
+
+    public String delete() {
+        ReturnCode deleteReturn = appServicePort.delete(this.id);
+
+        this.output = "Delete returned: " + deleteReturn;
+
+        return null;
+    }
+
+    /**
+     * Getter & Setter
+     */
     public long getId() {
         return id;
     }
@@ -116,6 +117,5 @@ public class DetailManagedBean implements Serializable{
     public void setOutput(String output) {
         this.output = output;
     }
-    
-    
+
 }

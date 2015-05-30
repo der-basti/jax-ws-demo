@@ -20,8 +20,8 @@ import javax.enterprise.context.Dependent;
 @Dependent
 public class AppCatalog {
 
-     private AppService appServicePort;
-    private List<App> apps;
+    private AppService appServicePort;
+    //private List<App> apps;
     
     private long id;
 
@@ -41,13 +41,13 @@ public class AppCatalog {
         appServicePort = this.getAppServicePort();
     }
     
-    public List<App> getApps(){
-        return appServicePort.listAll();
-    }
-    
     /** Get service port stub for App web service. */
     private AppService getAppServicePort() {
         AppServiceService service = new AppServiceService();
         return service.getAppServicePort();
+    }
+    
+    public List<App> getApps(){
+        return appServicePort.listAll();
     }
 }

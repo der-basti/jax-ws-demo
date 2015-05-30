@@ -49,8 +49,9 @@
                         <f:selectItem itemLabel="false" itemValue="false"/>
                     </h:selectOneRadio>
                 </h:panelGrid>
-                <h:commandButton value="Create/Update" type="submit" action="#{detailManagedBean.update()}"/>
-                <h:commandButton value="Delete" type="submit" action="#{detailManagedBean.delete()}"/>
+                <h:commandButton value="Create/Update" type="submit" action="#{detailManagedBean.update()}" rendered="#{detailManagedBean.id!=-1}"/>
+                                <h:commandButton value="Delete" type="submit" action="#{detailManagedBean.delete()}" rendered="#{detailManagedBean.id!=-1}"/>
+                <h:commandButton value="Create" type="submit" action="#{detailManagedBean.create()}" rendered="#{detailManagedBean.id==-1}"/>
             </h:form>
             <br/><br/>
             <h:panelGrid columns="2" rendered="#{not empty detailManagedBean.output}">
