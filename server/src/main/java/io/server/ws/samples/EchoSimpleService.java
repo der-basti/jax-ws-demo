@@ -1,9 +1,9 @@
-package io.server.ws;
+package io.server.ws.samples;
 
 import javax.jws.WebService;
 
 /**
- * The simplest JAX-WS (http://localhost:8080/jax-ws-demo/EchoSimpleService?wsdl).
+ * The simplest JAX-WS (http://localhost:8080/jax-ws-demo-server/EchoSimpleService?wsdl).
  * 
  * @author s7n
  */
@@ -12,9 +12,5 @@ public class EchoSimpleService {
 
 	public String getHello() {
 		return "Hello World";
-	}
-
-	protected void notVisible() {
-		// nothing to do
 	}
 }

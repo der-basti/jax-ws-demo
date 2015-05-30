@@ -19,16 +19,35 @@ import javax.xml.bind.Unmarshaller;
  */
 public class ModelGenerator {
 
-	public static final String RESOURCE_LOCATION = "src/main/resources/";
-	public static final String RESOURCE_FILE = "data.xml";
-	public static final String RESOURCE_IMAGE = "th-wildau-logo-500px-breit.png";
+	private static final String RESOURCE_LOCATION = "src/main/resources/";
+	private static final String RESOURCE_DATA = "data.xml";
+	private static final String RESOURCE_IMAGE = "th-wildau-logo-500px-breit.png";
+	private static final String RESOURCE_SAMPLE = "sample.file";
+
+	public static String getRessouceImage() {
+		return getRessourceLocation(RESOURCE_IMAGE);
+	}
+	
+	public static String getRessouceSample() {
+		return getRessourceLocation(RESOURCE_SAMPLE);
+	}
+
+	private static String getRessourceLocation(final String name) {
+		return ModelGenerator.class.getClassLoader().getResource(name)
+				.getFile();
+	}
 
 	public static String generateAppUrl() {
 		return "/app/" + UUID.randomUUID() + ".app";
 	}
 
+	/**
+	 * Generate data.xml file.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		marshal(new File(RESOURCE_LOCATION + RESOURCE_FILE), getModel());
+		marshal(new File(RESOURCE_LOCATION + RESOURCE_DATA), getModel());
 	}
 
 	public static AppContainer getModel() {
@@ -46,7 +65,9 @@ public class ModelGenerator {
 					activated, new Date(), appUrl, checksum, img);
 			App go = new App(4L, "Go!", "The Game", 0.25, activated,
 					new Date(), appUrl, checksum, img);
-			return new AppContainer(tutti, runaway, chrofox, go);
+			App spartan = new App(5L, "Spartan", "New Ultimate Web Browser", 0.48,
+					activated, new Date(), appUrl, checksum, img);
+			return new AppContainer(tutti, runaway, chrofox, go, spartan);
 		} catch (final IOException e) {
 			e.printStackTrace();
 			return new AppContainer();

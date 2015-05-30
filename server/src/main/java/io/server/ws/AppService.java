@@ -7,9 +7,10 @@ import java.awt.Image;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jws.WebParam;
 import javax.jws.WebService;
-import javax.validation.constraints.NotNull;
 import javax.xml.ws.soap.MTOM;
 
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author s7n
  */
+@Stateless
 @WebService
 @MTOM
 public class AppService {
@@ -46,7 +48,7 @@ public class AppService {
 	 *            long
 	 * @return AppService object id exists, else FIXME
 	 */
-	public App getAppById(final Long id) {
+	public App getAppById(final @WebParam(name = "id") Long id) {
 		log("getAppById", id);
 		final App app = this.backendBean.get(id);
 		if (app != null) {
@@ -57,13 +59,25 @@ public class AppService {
 	}
 
 	/**
+	 * Find a application by name.
+	 * 
+	 * @param name
+	 *            string
+	 * @return {@link AppService} list
+	 */
+	public List<App> find(final @WebParam(name = "name") String name) {
+		log("find", name);
+		return this.backendBean.find(name);
+	}
+
+	/**
 	 * Get application image (MTOM).
 	 * 
 	 * @param id
 	 *            long
 	 * @return byte[] image data
 	 */
-	public Image downloadImage(final Long id) {
+	public Image downloadImage(final @WebParam(name = "id") Long id) {
 		log("downloadImage", id);
 		return this.backendBean.getImage(id);
 	}
@@ -73,7 +87,8 @@ public class AppService {
 	 * @param image
 	 * @return
 	 */
-	public ReturnCode uploadImage(final Long id, final Image image) {
+	public ReturnCode uploadImage(final @WebParam(name = "id") Long id,
+			final @WebParam(name = "image") Image image) {
 		log("uploadImage", id);
 		if (image == null) {
 			return ReturnCode.OBJECT_NOT_FOUND;
@@ -89,12 +104,13 @@ public class AppService {
 	 *            identify by id and include all informations.
 	 * @return {@link ReturnCode}
 	 */
-	@Deprecated
-	public ReturnCode update(final @NotNull App app) {
-		log("update", app.getId());
+	public ReturnCode update(final @WebParam(name = "id") Long id,
+			final @WebParam(name = "name") String name,
+			final @WebParam(name = "description") String description,
+			final @WebParam(name = "price") Double price) {
+		log("update", id);
 		// validierung not changed (id, addDate, checksum, image)
-		return this.backendBean.update(app.getId(), app.getName(),
-				app.getDescription(), app.getPrice());
+		return this.backendBean.update(id, name, description, price);
 	}
 
 	/**
@@ -104,7 +120,7 @@ public class AppService {
 	 *            application identifier
 	 * @return {@link ReturnCode}
 	 */
-	public ReturnCode delete(final Long id) {
+	public ReturnCode delete(final @WebParam(name = "id") Long id) {
 		log("delete app", id);
 		return this.backendBean.delete(id);
 	}

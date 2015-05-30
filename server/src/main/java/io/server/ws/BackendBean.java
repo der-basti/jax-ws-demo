@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateful;
+import javax.enterprise.context.ApplicationScoped;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author s7n
  */
-@Stateful
+@ApplicationScoped
 @LocalBean
 public class BackendBean implements Serializable {
 
@@ -71,8 +71,11 @@ public class BackendBean implements Serializable {
 	 */
 	public List<App> find(final String name) {
 		log("find applications by name", name);
-		return this.appContainer.getApps().stream()
-				.filter(e -> e.getName().equalsIgnoreCase(name))
+		return this.appContainer
+				.getApps()
+				.stream()
+				.filter(e -> e.getName().toLowerCase()
+						.contains(name.toLowerCase()))
 				.collect(Collectors.<App> toList());
 	}
 
@@ -85,8 +88,14 @@ public class BackendBean implements Serializable {
 	 */
 	public App get(final Long id) {
 		log("get application by id", id);
-		return this.appContainer.getApps().stream().findFirst()
-				.filter(e -> e.getId() == id).orElse(null);
+		return this.appContainer.getApps().stream().findAny()
+				.filter(e -> e.getId().equals(id)).orElse(null);
+		// for (final App app : this.appContainer.getApps()) {
+		// if (app.getId().equals(id)) {
+		// return app;
+		// }
+		// }
+		// return null;
 	}
 
 	/**
@@ -138,9 +147,8 @@ public class BackendBean implements Serializable {
 
 		// create new entry
 		try {
-			final Image image = ImageIO.read(new File(ModelGenerator.class
-					.getClassLoader()
-					.getResource(ModelGenerator.RESOURCE_IMAGE).getFile()));
+			final Image image = ImageIO.read(new File(ModelGenerator
+					.getRessouceImage()));
 			final String appUrl = ModelGenerator.generateAppUrl();
 			final String checksum = UUID.randomUUID().toString();
 			this.appContainer.getApps().add(
