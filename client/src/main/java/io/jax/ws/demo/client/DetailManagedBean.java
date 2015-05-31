@@ -9,13 +9,11 @@ import io.server.ws.App;
 import io.server.ws.AppService;
 import io.server.ws.AppServiceService;
 import io.server.ws.ReturnCode;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Base64;
 import java.util.Base64.Encoder;
-import java.util.Scanner;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.servlet.http.Part;
@@ -96,24 +94,11 @@ public class DetailManagedBean implements Serializable {
         // update Image
         if(imageFile!=null){
         try{
-            //String fileContent = new Scanner(imageFile.getInputStream()).useDelimiter("\\A").next();
-            //System.out.println(fileContent);
-            InputStream inputStream = imageFile.getInputStream();   
-            byte[] bytes = IOUtils.readFully(inputStream,-1,true);
-//        FileOutputStream outputStream = new FileOutputStream(getFilename(imageFile));  
-//          
-//        byte[] buffer = new byte[4096];          
-//        int bytesRead = 0;  
-//        while(true) {                          
-//            bytesRead = inputStream.read(buffer);  
-//            if(bytesRead > 0) {  
-//                outputStream.write(buffer, 0, bytesRead);  
-//            }else {  
-//                break;  
-//            }                         
-//        }  
-//        outputStream.close();  
-        inputStream.close();  
+            byte[] bytes;   
+            try ( 
+                    InputStream inputStream = imageFile.getInputStream()) {
+                bytes = IOUtils.readFully(inputStream,-1,true);
+            }  
             
         returnCode = appServicePort.uploadImage(app.getId(), bytes);
         this.output = output+"\n File Upload: " + returnCode;
@@ -126,16 +111,6 @@ public class DetailManagedBean implements Serializable {
 
         return null;
     }
-    
-    private static String getFilename(Part part) {  
-        for (String cd : part.getHeader("content-disposition").split(";")) {  
-            if (cd.trim().startsWith("filename")) {  
-                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");  
-                return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.  
-            }  
-        }  
-        return null;  
-    }  
 
     public String delete() {
         ReturnCode deleteReturn = appServicePort.delete(this.id);

@@ -21,19 +21,9 @@ import javax.enterprise.context.Dependent;
 public class AppCatalog {
 
     private AppService appServicePort;
-    //private List<App> apps;
     
     private long id;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        System.out.println("id is:"+id);
-        this.id = id;
-    }
-    
     /**
      * Creates a new instance of AppCatalog
      */
@@ -50,4 +40,20 @@ public class AppCatalog {
     public List<App> getApps(){
         return appServicePort.listAll();
     }
+    
+    public List<App> getAppsActivated(){
+        return appServicePort.listAll();
+    }
+    
+    /**
+     * Getter & Setter
+     */
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }   
+    
 }

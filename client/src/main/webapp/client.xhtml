@@ -10,9 +10,9 @@
         <h1>JAX-WS-DEMO - Client</h1>
 
         <a href="#{request.contextPath}/">Back</a>
-
-
-        <h:dataTable value="#{appCatalog.apps}" var="app">
+<br/>
+<br/>
+<h:dataTable value="#{appCatalog.apps}" var="app">
             <h:column>
                 <f:facet name="header">ID</f:facet>
                 <h:outputText value="#{app.id}"></h:outputText>
@@ -25,6 +25,7 @@
 
             </h:column>
         </h:dataTable>
+        
         <h:button value="Create" outcome="appDetails">
             <f:param name="id" value="-1" />
         </h:button>
