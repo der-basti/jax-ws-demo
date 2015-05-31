@@ -85,7 +85,8 @@ public class DetailManagedBean implements Serializable {
         
         // update Name, Description and Price
         try {         
-            returnCode = appServicePort.update(app.getId(), app.getName(), app.getDescription(), app.getPrice());
+            //returnCode = appServicePort.update(app.getId(), app.getName(), app.getDescription(), app.getPrice());
+            returnCode = appServicePort.update(app.getId(), app.isActivated(), app.getName(),app.getDescription(),app.getPrice());
             this.output = returnCode.toString();
         } catch (Exception e) {
             this.output = "Update/Create: " + ReturnCode.INTERNAL_ERROR.toString();

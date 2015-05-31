@@ -42,7 +42,7 @@ public class AppCatalog {
     }
     
     public List<App> getAppsActivated(){
-        return appServicePort.listAll();
+        return appServicePort.listAllActivated();
     }
     
     /**
