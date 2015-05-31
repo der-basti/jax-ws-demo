@@ -14,8 +14,8 @@
         <br/>
 
         <h:panelGrid id="inputForm" columns="2" border="1" columnClasses="topAligned">
-            <h:outputText value="All Apps"/>
-            <h:outputText value="All Activated Apps"/>
+            <h:outputText escape="false" value="All &lt;b&gt;activated&lt;/b&gt; Apps"/>
+            <h:outputText escape="false" value="All &lt;b&gt;inactivated&lt;/b&gt; Apps"/>
 
             <h:dataTable value="#{appCatalog.apps}" var="app">
                 <!-- DataTable: All activated Apps -->
