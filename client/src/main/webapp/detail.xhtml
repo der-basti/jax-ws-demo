@@ -18,17 +18,17 @@
 
             <h:form enctype="multipart/form-data"> 
 
-                <h:panelGrid columns="2">
+                <h:panelGrid id="inputForm" columns="2">
                     <h:outputText value="Id:"/>
                     <h:outputText value="#{detailManagedBean.app.id}"/>
 
                     <h:outputText value="Name:"/>
                     <h:inputText value="#{detailManagedBean.app.name}"/>
 
-                    <h:outputText value="Image"/>
+                    <h:outputText value="Image:"/>
                     <h:graphicImage value="#{detailManagedBean.imageAsBase64()}"/>
                     
-                    <h:outputText value="Image"/>
+                    <h:outputText value="Image Upload:"/>
                     <h:inputFile value="#{detailManagedBean.imageFile}"/>
 
                     <h:outputText value="Description:"/>
@@ -41,7 +41,7 @@
                     <h:outputText value="#{detailManagedBean.app.addDate}"/>
 
                     <h:outputText value="AppURL:"/>
-                    <h:inputText value="#{detailManagedBean.app.appUrl}"/>
+                    <h:outputText value="#{detailManagedBean.app.appUrl}"/>
 
                     <h:outputText value="Checksum (md5sum):"/>
                     <h:outputText value="#{detailManagedBean.app.checksum}"/>
@@ -52,8 +52,9 @@
                         <f:selectItem itemLabel="false" itemValue="false"/>
                     </h:selectOneRadio>
                 </h:panelGrid>
-                <h:commandButton value="Create/Update" type="submit" action="#{detailManagedBean.update()}" rendered="#{detailManagedBean.id!=-1}"/>
-                                <h:commandButton value="Delete" type="submit" action="#{detailManagedBean.delete()}" rendered="#{detailManagedBean.id!=-1}"/>
+                
+                <h:commandButton value="Update" type="submit" action="#{detailManagedBean.update()}" rendered="#{detailManagedBean.id!=-1}"/>
+                <h:commandButton value="Delete" type="submit" action="#{detailManagedBean.delete()}" rendered="#{detailManagedBean.id!=-1}"/>
                 <h:commandButton value="Create" type="submit" action="#{detailManagedBean.create()}" rendered="#{detailManagedBean.id==-1}"/>
             </h:form>
             <br/><br/>
