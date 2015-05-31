@@ -47,7 +47,7 @@ public class AppService {
 	 * 
 	 * @return {@link App} list
 	 */
-	public List<App> listAllActivated() {
+	public List<App> listAllInactivated() {
 		log("find inactivated apps");
 		return this.backendBean.findAllInactivated();
 	}
