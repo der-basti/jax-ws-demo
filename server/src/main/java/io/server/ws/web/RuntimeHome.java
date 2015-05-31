@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Named
-@ViewScoped
+@ApplicationScoped
 public class RuntimeHome implements Serializable {
 
 	private static final long serialVersionUID = -2955707944574962595L;
@@ -48,6 +48,12 @@ public class RuntimeHome implements Serializable {
 
 	public String getAppCount() {
 		return String.valueOf(this.backendBean.findAll().size());
+	}
+
+	public String resetModel() {
+		// AjaxBehaviorEvent
+		this.backendBean.init();
+		return "?faces-redirect=true";
 	}
 
 	public String getIp() {

@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.ws.soap.MTOM;
 
@@ -112,10 +113,11 @@ public class AppService {
 	 * 
 	 * @param app
 	 *            identify by id and include all informations.
-	 * @return {@link ReturnCode}
+	 * @return application id
 	 * @throws Exception
 	 */
-	public ReturnCode update(final @WebParam(name = "id") long id,
+	@WebResult(name = "id")
+	public long update(final @WebParam(name = "id") long id,
 			final @WebParam(name = "activated") Boolean activated,
 			final @WebParam(name = "name") String name,
 			final @WebParam(name = "description") String description,
