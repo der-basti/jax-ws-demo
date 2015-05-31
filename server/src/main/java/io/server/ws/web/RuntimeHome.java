@@ -41,7 +41,8 @@ public class RuntimeHome implements Serializable {
 		List<App> findList = this.backendBean.find("ChroFox");
 		// byte[] barray = this.backendBean.getBinary(1L);
 		// 4L, "Go!", "The Game", 0.25, activated, new Date(),
-		this.backendBean.update(4L, "The Game Go", "new description", 99.99d);
+		// this.backendBean.update(4L, true, "The Game Go", "new description",
+		// 99.99d);
 		appList = this.backendBean.findAll();
 	}
 

@@ -28,7 +28,7 @@ public class AppContainer {
 
 	public AppContainer(final App... apps) {
 		if (apps != null) {
-			this.apps = Arrays.asList(apps);
+			this.apps = new ArrayList<>(Arrays.asList(apps)); // modifiable list
 		} else {
 			this.apps = new ArrayList<>();
 		}

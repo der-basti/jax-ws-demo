@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -63,6 +62,18 @@ public class BackendBean implements Serializable {
 	}
 
 	/**
+	 * Find all inactivated applications.
+	 * 
+	 * @return {@link AppService} list
+	 */
+	public List<App> findAllInactivated() {
+		log("find all inactivated applcations");
+		return this.appContainer.getApps().stream()
+				.filter(e -> !e.isActivated())
+				.collect(Collectors.<App> toList());
+	}
+
+	/**
 	 * Find a application by name.
 	 * 
 	 * @param name
@@ -76,6 +87,7 @@ public class BackendBean implements Serializable {
 				.stream()
 				.filter(e -> e.getName().toLowerCase()
 						.contains(name.toLowerCase()))
+				.filter(e -> e.isActivated())
 				.collect(Collectors.<App> toList());
 	}
 
@@ -122,16 +134,20 @@ public class BackendBean implements Serializable {
 	 * @param data
 	 *            application data
 	 * @return {@link ReturnCode}
+	 * 
+	 * @throws Exception
 	 */
-	public ReturnCode update(final Long id, final String name,
-			final String description, final Double price) {
+	public ReturnCode update(final Long id, final boolean activated,
+			final String name, final String description, final Double price)
+			throws Exception {
 		log("update/create application", id, name, description, price);
-		// update
+
+		// update entry
 		for (final Iterator<App> ia = this.appContainer.getApps().iterator(); ia
 				.hasNext();) {
 			App app = ia.next();
 			if (app.getId() == id) {
-				app.setActivated(true);
+				app.setActivated(activated);
 				app.setDescription(description);
 				app.setName(name);
 				app.setPrice(price);
@@ -141,13 +157,19 @@ public class BackendBean implements Serializable {
 
 		// create new entry
 		try {
+			if (id >= 0) {
+				throw new Exception(
+						"id doesn't exist. create a new app with id less zero.");
+			}
 			final Image image = ImageIO.read(new File(ModelGenerator
 					.getRessouceImage()));
 			final String appUrl = ModelGenerator.generateAppUrl();
 			final String checksum = UUID.randomUUID().toString();
 			this.appContainer.getApps().add(
-					new App(new Random().nextLong(), name, description, price,
-							true, new Date(), appUrl, checksum, image));
+					new App(Long
+							.valueOf(this.appContainer.getApps().size() + 1),
+							name, description, price, activated, new Date(),
+							appUrl, checksum, image));
 			return ReturnCode.SUCCESS;
 		} catch (final IOException e) {
 			log("can not load base image", e.getMessage());
@@ -185,10 +207,9 @@ public class BackendBean implements Serializable {
 	 * @param id
 	 * @return
 	 */
-	public ReturnCode delete(final Long id) {
+	public ReturnCode delete(final long id) {
 		log("delete application", id);
-		App app = this.appContainer.getApps().stream()
-				.filter(e -> e.getId().equals(id)).findFirst().orElse(null);
+		App app = get(id);
 		if (app == null) {
 			return ReturnCode.OBJECT_NOT_FOUND;
 		}

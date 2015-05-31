@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 @Stateless
 @WebService
 @MTOM
+// (threshold = 1000000) // binary data // extend | inline base64
 public class AppService {
 
 	private Logger log = LoggerFactory.getLogger(AppService.class);
@@ -46,15 +47,14 @@ public class AppService {
 	 * 
 	 * @param id
 	 *            long
-	 * @return AppService object id exists, else FIXME
+	 * @return AppService object id exists, else 'nothing'.
 	 */
-	public App getAppById(final @WebParam(name = "id") Long id) {
+	public App getAppById(final @WebParam(name = "id") long id) {
 		log("getAppById", id);
 		final App app = this.backendBean.get(id);
 		if (app != null) {
 			return app;
 		}
-		// FIXME SOAP FAULT
 		return null;
 	}
 
@@ -63,11 +63,21 @@ public class AppService {
 	 * 
 	 * @param name
 	 *            string
-	 * @return {@link AppService} list
+	 * @return {@link App} list
 	 */
 	public List<App> find(final @WebParam(name = "name") String name) {
 		log("find", name);
 		return this.backendBean.find(name);
+	}
+
+	/**
+	 * Find all inactivated applications.
+	 * 
+	 * @return {@link App} list
+	 */
+	public List<App> findInactivatedApps() {
+		log("find inactivated apps");
+		return this.backendBean.findAllInactivated();
 	}
 
 	/**
@@ -77,7 +87,7 @@ public class AppService {
 	 *            long
 	 * @return byte[] image data
 	 */
-	public Image downloadImage(final @WebParam(name = "id") Long id) {
+	public Image downloadImage(final @WebParam(name = "id") long id) {
 		log("downloadImage", id);
 		return this.backendBean.getImage(id);
 	}
@@ -87,7 +97,7 @@ public class AppService {
 	 * @param image
 	 * @return
 	 */
-	public ReturnCode uploadImage(final @WebParam(name = "id") Long id,
+	public ReturnCode uploadImage(final @WebParam(name = "id") long id,
 			final @WebParam(name = "image") Image image) {
 		log("uploadImage", id);
 		if (image == null) {
@@ -103,14 +113,16 @@ public class AppService {
 	 * @param app
 	 *            identify by id and include all informations.
 	 * @return {@link ReturnCode}
+	 * @throws Exception
 	 */
-	public ReturnCode update(final @WebParam(name = "id") Long id,
+	public ReturnCode update(final @WebParam(name = "id") long id,
+			final @WebParam(name = "activated") Boolean activated,
 			final @WebParam(name = "name") String name,
 			final @WebParam(name = "description") String description,
-			final @WebParam(name = "price") Double price) {
+			final @WebParam(name = "price") Double price) throws Exception {
 		log("update", id);
-		// validierung not changed (id, addDate, checksum, image)
-		return this.backendBean.update(id, name, description, price);
+		// just a simple backend call
+		return this.backendBean.update(id, activated, name, description, price);
 	}
 
 	/**
@@ -120,7 +132,7 @@ public class AppService {
 	 *            application identifier
 	 * @return {@link ReturnCode}
 	 */
-	public ReturnCode delete(final @WebParam(name = "id") Long id) {
+	public ReturnCode delete(final @WebParam(name = "id") long id) {
 		log("delete app", id);
 		return this.backendBean.delete(id);
 	}
