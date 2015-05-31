@@ -12,6 +12,7 @@ import java.util.Base64.Encoder;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.servlet.http.Part;
+import javax.xml.ws.Holder;
 import javax.xml.ws.soap.MTOMFeature;
 import sun.misc.IOUtils;
 
@@ -76,17 +77,24 @@ public class DetailManagedBean implements Serializable {
     /* Update existing App */
     public String update() {
         ReturnCode returnCode;
+        //long updatedId=-1;
+        Holder<Long> updateId = new Holder<>();
+        updateId.value=this.id;
 
         // update Name, isActivated, Description and Price
         try {
-            returnCode = appServicePort.update(app.getId(), app.isActivated(), app.getName(), app.getDescription(), app.getPrice());
-            this.output = returnCode.toString();
+            appServicePort.update(updateId, app.isActivated(), app.getName(), app.getDescription(), app.getPrice());
+            if(updateId.value>=0){
+                this.output = "Update/Create: "+ReturnCode.SUCCESS+" with Id "+updateId.value;
+            }else{
+                this.output = "Update/Create: "+ReturnCode.INTERNAL_ERROR+" with Code "+updateId.value;
+            }
         } catch (Exception e) {
             this.output = "Update/Create: " + ReturnCode.INTERNAL_ERROR.toString();
         }
 
         // update Image
-        if (imageFile != null) {
+        if (imageFile != null && updateId.value>=0) {
             // convert Part data from inputFile to byte[]
             try {
                 byte[] bytes;
@@ -95,11 +103,11 @@ public class DetailManagedBean implements Serializable {
                     bytes = IOUtils.readFully(inputStream, -1, true);
                 }
 
-                returnCode = appServicePort.uploadImage(app.getId(), bytes);
-                this.output = output + "\n File Upload: " + returnCode;
+                returnCode = appServicePort.uploadImage(updateId.value, bytes);
+                this.output = output + "/n File Upload: " + returnCode;
 
             } catch (IOException e) {
-                this.output = this.output + "\n Could not get fileContent";
+                this.output = this.output + "/n Could not get fileContent";
             }
         }
 
