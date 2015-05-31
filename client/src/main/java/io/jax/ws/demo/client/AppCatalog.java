@@ -41,8 +41,8 @@ public class AppCatalog {
         return appServicePort.listAll();
     }
     
-    public List<App> getAppsActivated(){
-        return appServicePort.listAllActivated();
+    public List<App> getAppsInactivated(){
+        return appServicePort.listAllInactivated();
     }
     
     /**
