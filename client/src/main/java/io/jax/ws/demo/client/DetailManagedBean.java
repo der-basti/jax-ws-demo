@@ -79,22 +79,22 @@ public class DetailManagedBean implements Serializable {
         ReturnCode returnCode;
         //long updatedId=-1;
         Holder<Long> updateId = new Holder<>();
-        updateId.value=this.id;
+        updateId.value = this.id;
 
         // update Name, isActivated, Description and Price
         try {
             appServicePort.update(updateId, app.isActivated(), app.getName(), app.getDescription(), app.getPrice());
-            if(updateId.value>=0){
-                this.output = "Update/Create: "+ReturnCode.SUCCESS+" with Id "+updateId.value;
-            }else{
-                this.output = "Update/Create: "+ReturnCode.INTERNAL_ERROR+" with Code "+updateId.value;
+            if (updateId.value >= 0) {
+                this.output = "Update/Create: " + ReturnCode.SUCCESS + " with Id " + updateId.value;
+            } else {
+                this.output = "Update/Create: " + ReturnCode.INTERNAL_ERROR + " with Code " + updateId.value;
             }
         } catch (Exception e) {
             this.output = "Update/Create: " + ReturnCode.INTERNAL_ERROR.toString();
         }
 
         // update Image
-        if (imageFile != null && updateId.value>=0) {
+        if (imageFile != null && updateId.value >= 0) {
             // convert Part data from inputFile to byte[]
             try {
                 byte[] bytes;

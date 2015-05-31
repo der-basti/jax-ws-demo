@@ -27,7 +27,7 @@
 
                     <h:outputText value="Image:"/>
                     <h:graphicImage value="#{detailManagedBean.imageAsBase64()}"/>
-                    
+
                     <h:outputText value="Image Upload:"/>
                     <h:inputFile value="#{detailManagedBean.imageFile}"/>
 
@@ -52,7 +52,7 @@
                         <f:selectItem itemLabel="false" itemValue="false"/>
                     </h:selectOneRadio>
                 </h:panelGrid>
-                
+
                 <h:commandButton value="Update" type="submit" action="#{detailManagedBean.update()}" rendered="#{detailManagedBean.id!=-1}"/>
                 <h:commandButton value="Delete" type="submit" action="#{detailManagedBean.delete()}" rendered="#{detailManagedBean.id!=-1}"/>
                 <h:commandButton value="Create" type="submit" action="#{detailManagedBean.create()}" rendered="#{detailManagedBean.id==-1}"/>
