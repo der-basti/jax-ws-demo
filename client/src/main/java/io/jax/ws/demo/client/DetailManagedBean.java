@@ -59,6 +59,7 @@ public class DetailManagedBean implements Serializable {
             this.app = appServicePort.getAppById(this.id);
         } else {
             this.app = new App();
+            this.app.setId(-1L);
         }
         return null;
     }
@@ -74,6 +75,7 @@ public class DetailManagedBean implements Serializable {
     }
 
      public String create() {
+         
         this.update();
         
         
