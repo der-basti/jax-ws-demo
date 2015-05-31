@@ -88,14 +88,8 @@ public class BackendBean implements Serializable {
 	 */
 	public App get(final Long id) {
 		log("get application by id", id);
-		return this.appContainer.getApps().stream().findAny()
-				.filter(e -> e.getId().equals(id)).orElse(null);
-		// for (final App app : this.appContainer.getApps()) {
-		// if (app.getId().equals(id)) {
-		// return app;
-		// }
-		// }
-		// return null;
+		return this.appContainer.getApps().stream()
+				.filter(e -> e.getId().equals(id)).findFirst().orElse(null);
 	}
 
 	/**
