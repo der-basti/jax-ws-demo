@@ -16,7 +16,7 @@
             <h1>JAX-WS-DEMO - Client - Detail</h1>
             <a href="#{request.contextPath}/client.xhtml">Back</a>
 
-            <h:form> 
+            <h:form enctype="multipart/form-data"> 
 
                 <h:panelGrid columns="2">
                     <h:outputText value="Id:"/>
@@ -27,6 +27,9 @@
 
                     <h:outputText value="Image"/>
                     <h:graphicImage value="#{detailManagedBean.imageAsBase64()}"/>
+                    
+                    <h:outputText value="Image"/>
+                    <h:inputFile value="#{detailManagedBean.imageFile}"/>
 
                     <h:outputText value="Description:"/>
                     <h:inputTextarea value="#{detailManagedBean.app.description}" />
