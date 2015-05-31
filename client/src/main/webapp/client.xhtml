@@ -10,39 +10,42 @@
         <h1>JAX-WS-DEMO - Client</h1>
 
         <a href="#{request.contextPath}/">Back</a>
-<br/>
-<br/>
-<h:panelGrid id="inputForm" columns="2" border="1">
-   
-         <h:outputText value="All Apps"/>
-         <h:outputText value="All Activated Apps"/>
-<h:dataTable value="#{appCatalog.apps}" var="app">
-            <h:column>
-                <f:facet name="header">ID</f:facet>
-                <h:outputText value="#{app.id}"></h:outputText>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                <h:link value="#{app.name}" outcome="appDetails">
-                    <f:param name="id" value="#{app.id}" />
-                </h:link>
+        <br/>
+        <br/>
 
-            </h:column>
-        </h:dataTable>
-         <h:dataTable value="#{appCatalog.appsInactivated}" var="app">
-            <h:column>
-                <f:facet name="header">ID</f:facet>
-                <h:outputText value="#{app.id}"></h:outputText>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                <h:link value="#{app.name}" outcome="appDetails">
-                    <f:param name="id" value="#{app.id}" />
-                </h:link>
-
-            </h:column>
-        </h:dataTable>
- </h:panelGrid>      
+        <h:panelGrid id="inputForm" columns="2" border="1" columnClasses="topAligned">
+            <h:outputText value="All Apps"/>
+            <h:outputText value="All Activated Apps"/>
+            
+            <h:dataTable value="#{appCatalog.apps}" var="app">
+                <!-- DataTable: All activated Apps -->
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{app.id}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:link value="#{app.name}" outcome="appDetails">
+                        <f:param name="id" value="#{app.id}" />
+                    </h:link>
+                </h:column>
+            </h:dataTable>
+            
+            <h:dataTable value="#{appCatalog.appsInactivated}" var="app">
+                <!-- DataTable: All inactivated Apps -->
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{app.id}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:link value="#{app.name}" outcome="appDetails">
+                        <f:param name="id" value="#{app.id}" />
+                    </h:link>
+                </h:column>
+            </h:dataTable>
+        </h:panelGrid>
+        
         <h:button value="Create" outcome="appDetails">
             <f:param name="id" value="-1" />
         </h:button>
