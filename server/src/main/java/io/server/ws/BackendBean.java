@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
@@ -17,7 +18,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.LocalBean;
 import javax.enterprise.context.ApplicationScoped;
 import javax.imageio.ImageIO;
 
@@ -30,7 +30,6 @@ import org.slf4j.LoggerFactory;
  * @author s7n
  */
 @ApplicationScoped
-@LocalBean
 public class BackendBean implements Serializable {
 
 	private static final long serialVersionUID = -3921199152183955121L;
@@ -136,21 +135,23 @@ public class BackendBean implements Serializable {
 	 * 
 	 * @throws Exception
 	 */
-	public ReturnCode update(final Long id, final boolean activated,
+	public long update(final Long id, final boolean activated,
 			final String name, final String description, final Double price)
 			throws Exception {
-		log("update/create application", id, name, description, price);
+		log("update/create application", id, activated, name, description,
+				price);
 
 		// update entry
 		for (final Iterator<App> ia = this.appContainer.getApps().iterator(); ia
 				.hasNext();) {
 			App app = ia.next();
 			if (app.getId() == id) {
+				log("update app");
 				app.setActivated(activated);
 				app.setDescription(description);
 				app.setName(name);
 				app.setPrice(price);
-				return ReturnCode.SUCCESS;
+				return id;
 			}
 		}
 
@@ -160,19 +161,21 @@ public class BackendBean implements Serializable {
 				throw new Exception(
 						"id doesn't exist. create a new app with id less zero.");
 			}
+			log("create new app");
 			final Image image = ImageIO.read(new File(ModelGenerator
 					.getRessouceImage()));
 			final String appUrl = ModelGenerator.generateAppUrl();
 			final String checksum = UUID.randomUUID().toString();
-			this.appContainer.getApps().add(
-					new App(Long
-							.valueOf(this.appContainer.getApps().size() + 1),
-							name, description, price, activated, new Date(),
-							appUrl, checksum, image));
-			return ReturnCode.SUCCESS;
+			App newApp = new App(Long.valueOf(this.appContainer.getApps()
+					.size() + 1), name, description, price, activated,
+					new Date(), appUrl, checksum, image);
+			List<App> newAppList = new ArrayList<>(this.appContainer.getApps());
+			newAppList.add(newApp);
+			this.appContainer.setApps(newAppList);
+			return newApp.getId();
 		} catch (final IOException e) {
 			log("can not load base image", e.getMessage());
-			return ReturnCode.INTERNAL_ERROR;
+			throw new Exception("Internel Error. Could not load default image.");
 		}
 	}
 
