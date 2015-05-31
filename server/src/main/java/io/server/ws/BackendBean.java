@@ -20,7 +20,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.enterprise.context.ApplicationScoped;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -186,19 +185,15 @@ public class BackendBean implements Serializable {
 	 *            byte array
 	 * @return {@link ReturnCode}
 	 */
-	public ReturnCode updateImage(final Long id, final byte[] image) {
+	public ReturnCode updateImage(final Long id, final Image image) {
 		log("update application", id);
-		for (final Iterator<App> ia = this.appContainer.getApps().iterator(); ia
-				.hasNext();) {
-			App app = ia.next();
-			if (app.getId() == id) {
-				app.setImage(new ImageIcon(image).getImage());
-				app.setAppUrl("/apps/" + UUID.randomUUID() + ".app");
-				app.setChecksum(UUID.randomUUID().toString());
-				return ReturnCode.SUCCESS;
-			}
+		App app = get(id);
+		if (app == null) {
+			return ReturnCode.OBJECT_NOT_FOUND;
 		}
-		return ReturnCode.OBJECT_NOT_FOUND;
+		// app.setImage(new ImageIcon(image).getImage());
+		app.setImage(image);
+		return ReturnCode.SUCCESS;
 	}
 
 	/**
