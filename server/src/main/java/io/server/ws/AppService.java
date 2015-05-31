@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jws.HandlerChain;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
@@ -26,6 +27,7 @@ import org.slf4j.LoggerFactory;
 @WebService
 @MTOM
 // (threshold = 1000000) // binary data // extend | inline base64
+@HandlerChain(file="/handlers.xml")
 public class AppService {
 
 	private Logger log = LoggerFactory.getLogger(AppService.class);
