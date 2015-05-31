@@ -33,13 +33,23 @@ public class AppService {
 	private BackendBean backendBean;
 
 	/**
-	 * AppService include AppService (name, id, description) informations.
+	 * List of all activated applications.
 	 * 
 	 * @return List of {@link AppService}
 	 */
 	public List<App> listAll() {
 		log("listAll");
 		return this.backendBean.findAll();
+	}
+
+	/**
+	 * List of all inactivated applications.
+	 * 
+	 * @return {@link App} list
+	 */
+	public List<App> listAllActivated() {
+		log("find inactivated apps");
+		return this.backendBean.findAllInactivated();
 	}
 
 	/**
@@ -71,16 +81,6 @@ public class AppService {
 	}
 
 	/**
-	 * Find all inactivated applications.
-	 * 
-	 * @return {@link App} list
-	 */
-	public List<App> findInactivatedApps() {
-		log("find inactivated apps");
-		return this.backendBean.findAllInactivated();
-	}
-
-	/**
 	 * Get application image (MTOM).
 	 * 
 	 * @param id
@@ -103,7 +103,7 @@ public class AppService {
 		if (image == null) {
 			return ReturnCode.OBJECT_NOT_FOUND;
 		}
-		// do magic
+		this.backendBean.updateImage(id, image);
 		return ReturnCode.SUCCESS;
 	}
 
