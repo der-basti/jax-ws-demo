@@ -26,6 +26,7 @@ import javax.xml.ws.soap.MTOM;
 // http://www.mkyong.com/webservices/jax-ws/jax-ws-attachment-with-mtom/
 // https://metro.java.net/nonav/1.2/guide/Binary_Attachments__MTOM_.html#MTOM_threshold
 @MTOM(threshold = 3000)
+//(threshold = 1000000) // binary data // extend | inline base64
 @WebService
 public class BinaryService {
 
