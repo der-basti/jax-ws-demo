@@ -17,7 +17,7 @@
             <h:outputText escape="false" value="All &lt;b&gt;activated&lt;/b&gt; Apps"/>
             <h:outputText escape="false" value="All &lt;b&gt;inactivated&lt;/b&gt; Apps"/>
 
-            <h:dataTable value="#{appCatalog.apps}" var="app">
+            <h:dataTable value="#{appCatalogManagedBean.apps}" var="app">
                 <!-- DataTable: All activated Apps -->
                 <h:column>
                     <f:facet name="header">ID</f:facet>
@@ -31,7 +31,7 @@
                 </h:column>
             </h:dataTable>
 
-            <h:dataTable value="#{appCatalog.appsInactivated}" var="app">
+            <h:dataTable value="#{appCatalogManagedBean.appsInactivated}" var="app">
                 <!-- DataTable: All inactivated Apps -->
                 <h:column>
                     <f:facet name="header">ID</f:facet>

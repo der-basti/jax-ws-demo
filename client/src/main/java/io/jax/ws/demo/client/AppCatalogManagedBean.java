@@ -11,15 +11,15 @@ import javax.enterprise.context.Dependent;
  *
  * @author cschulze
  */
-@Named(value = "appCatalog")
+@Named(value = "appCatalogManagedBean")
 @Dependent
-public class AppCatalog {
+public class AppCatalogManagedBean {
 
     private AppService appServicePort;
     private long id;
 
-    /* Creates a new instance of AppCatalog */
-    public AppCatalog() {
+    /* Creates a new instance of AppCatalogManagedBean */
+    public AppCatalogManagedBean() {
         appServicePort = this.getAppServicePort();
     }
 
