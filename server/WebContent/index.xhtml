@@ -12,9 +12,11 @@
 
 		<details>
 			<p>
-				This demo application describes an very simple application store.
-				Host IP:
+				This is a jax-ws server demo application.<br /> IP:
 				<h:outputText value="#{runtimeHome.ip}" />
+				<br /> <a
+					href="http://127.0.0.1:9990/console/App.html#webservice-runtime"
+					target="_blank">Management Console</a>
 			</p>
 
 		</details>
@@ -24,7 +26,7 @@
 				<a href="">http://localhost:8080#{request.contextPath}/xyzService?wsdl</a>
 			</li-->
 
-			<li>Application Store Demo
+			<li>Demo: Application Store
 				<ul>
 					<li><h:form>
 							<h:outputText
@@ -42,6 +44,14 @@
 						target="_blank">EchoSimpleService?wsdl</a></li>
 					<li><a href="#{request.contextPath}/EchoComplexService?wsdl"
 						target="_blank">EchoComplexService?wsdl</a></li>
+					<li><a href="#{request.contextPath}/BinaryService?wsdl"
+						target="_blank">BinaryService?wsdl</a></li>
+					<li><a href="#{request.contextPath}/FaultService?wsdl"
+						target="_blank">FaultService?wsdl</a></li>
+					<li><a href="#{request.contextPath}/InterfaceService?wsdl"
+						target="_blank">InterfaceService?wsdl</a></li>
+					<!--li><a href="#{request.contextPath}/?wsdl"
+						target="_blank">?wsdl</a></li-->
 				</ul>
 			</li>
 		</ul>

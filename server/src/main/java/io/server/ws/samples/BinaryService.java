@@ -14,6 +14,12 @@ import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.ws.soap.MTOM;
 
+/**
+ * Binary transport samples.
+ * 
+ * @author s7n
+ *
+ */
 // Sources:
 // https://jax-ws.java.net/2.2/docs/mtom-swaref.html
 // https://docs.oracle.com/cd/E17802_01/webservices/webservices/docs/2.0/jaxws/mtom-swaref.html
