@@ -18,7 +18,7 @@ import javax.xml.ws.handler.soap.SOAPMessageContext;
  * @author Christopher
  */
 public class SOAPLogHandler implements SOAPHandler<SOAPMessageContext> {
-      
+	
     public boolean handleMessage(SOAPMessageContext messageContext) {
         logMessage(messageContext);
         return true;

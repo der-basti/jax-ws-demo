@@ -13,6 +13,7 @@ import javax.jws.HandlerChain;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import javax.xml.ws.BindingType;
 import javax.xml.ws.soap.MTOM;
 
 import org.slf4j.Logger;
@@ -26,8 +27,7 @@ import org.slf4j.LoggerFactory;
 @Stateless
 @WebService
 @MTOM
-// (threshold = 1000000) // binary data // extend | inline base64
-@HandlerChain(file="/handlers.xml")
+// @HandlerChain(file = "/handlers.xml") // @BindingType(value = "URI")
 public class AppService {
 
 	private Logger log = LoggerFactory.getLogger(AppService.class);
