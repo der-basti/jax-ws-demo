@@ -25,7 +25,7 @@ public class SOAPLogHandler implements SOAPHandler<SOAPMessageContext> {
     }
     
     public Set<QName> getHeaders() {
-        return Collections.EMPTY_SET;
+        return Collections.emptySet();
     }
     
     public boolean handleFault(SOAPMessageContext messageContext) {

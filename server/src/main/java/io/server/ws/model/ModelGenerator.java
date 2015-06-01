@@ -21,11 +21,14 @@ public class ModelGenerator {
 
 	private static final String RESOURCE_LOCATION = "src/main/resources/";
 	private static final String RESOURCE_DATA = "data.xml";
-	private static final String RESOURCE_IMAGE = "th-wildau-logo-500px-breit.png";
 	private static final String RESOURCE_SAMPLE = "sample.file";
+	@SuppressWarnings("unused")
+	private static final String RESOURCE_IMAGE_TH = "th-wildau-logo-500px-breit.png";
+	private static final String RESOURCE_IMAGE_CONSTRUCTOCAT = "constructocat2.jpg";
+	
 
 	public static String getRessouceImage() {
-		return getRessourceLocation(RESOURCE_IMAGE);
+		return getRessourceLocation(RESOURCE_IMAGE_CONSTRUCTOCAT);
 	}
 	
 	public static String getRessouceSample() {
@@ -53,7 +56,7 @@ public class ModelGenerator {
 	public static AppContainer getModel() {
 		try {
 			final Image img = ImageIO.read(new File(ModelGenerator.class
-					.getClassLoader().getResource(RESOURCE_IMAGE).getFile()));
+					.getClassLoader().getResource(RESOURCE_IMAGE_CONSTRUCTOCAT).getFile()));
 			final boolean activated = true;
 			final String appUrl = generateAppUrl();
 			final String checksum = UUID.randomUUID().toString();
