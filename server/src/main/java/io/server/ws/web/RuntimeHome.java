@@ -51,9 +51,8 @@ public class RuntimeHome implements Serializable {
 	}
 
 	public String resetModel() {
-		// AjaxBehaviorEvent
 		this.backendBean.init();
-		return "?faces-redirect=true";
+		return "/index.xhtml";
 	}
 
 	public String getIp() {

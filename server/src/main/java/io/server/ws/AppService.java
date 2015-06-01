@@ -9,11 +9,9 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.jws.HandlerChain;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
-import javax.xml.ws.BindingType;
 import javax.xml.ws.soap.MTOM;
 
 import org.slf4j.Logger;
@@ -96,9 +94,11 @@ public class AppService {
 	}
 
 	/**
+	 * Update image.
 	 * 
 	 * @param image
-	 * @return
+	 *            data
+	 * @return {@link ReturnCode}
 	 */
 	public ReturnCode uploadImage(final @WebParam(name = "id") long id,
 			final @WebParam(name = "image") Image image) {
@@ -116,7 +116,8 @@ public class AppService {
 	 * @param app
 	 *            identify by id and include all informations.
 	 * @return application id
-	 * @throws Exception
+	 * @throws long
+	 *             or Exception
 	 */
 	@WebResult(name = "id")
 	public long update(final @WebParam(name = "id") long id,

@@ -63,7 +63,7 @@ public class ModelGenerator {
 					0.99, activated, new Date(), appUrl, checksum, img);
 			App chrofox = new App(3L, "ChroFox", "Ultimate Web Browser", 0.49,
 					activated, new Date(), appUrl, checksum, img);
-			App go = new App(4L, "Go!", "The Game", 0.25, activated,
+			App go = new App(4L, "Go!", "The Game", 0.25, false,
 					new Date(), appUrl, checksum, img);
 			App spartan = new App(5L, "Spartan", "New Ultimate Web Browser", 0.48,
 					activated, new Date(), appUrl, checksum, img);
