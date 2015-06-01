@@ -77,7 +77,6 @@ public class DetailManagedBean implements Serializable {
     /* Update existing App */
     public String update() {
         ReturnCode returnCode;
-        //long updatedId=-1;
         Holder<Long> updateId = new Holder<>();
         updateId.value = this.id;
 
@@ -104,10 +103,10 @@ public class DetailManagedBean implements Serializable {
                 }
 
                 returnCode = appServicePort.uploadImage(updateId.value, bytes);
-                this.output = output + "/n File Upload: " + returnCode;
+                this.output = output + " File Upload: " + returnCode;
 
             } catch (IOException e) {
-                this.output = this.output + "/n Could not get fileContent";
+                this.output = this.output + " Could not get fileContent";
             }
         }
 
