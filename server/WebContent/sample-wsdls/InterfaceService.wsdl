@@ -1,0 +1,28 @@
+<!--wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://samples.ws.server.io/InterfaceService"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http"
+	xmlns:ns1="io.server.ws.samples.InterfaceService" name="InterfaceService"
+	targetNamespace="http://samples.ws.server.io/InterfaceService">
+	<wsdl:import
+		location="http://localhost:8080/jax-ws-demo-server/InterfaceService?wsdl=InterfaceService.wsdl"
+		namespace="io.server.ws.samples.InterfaceService"></wsdl:import>
+	<wsdl:binding name="InterfaceServiceSoapBinding" type="ns1:InterfaceService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="sayHello">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="sayHello">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="sayHelloResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="InterfaceService">
+		<wsdl:port binding="tns:InterfaceServiceSoapBinding" name="InterfaceServicePort">
+			<soap:address
+				location="http://localhost:8080/jax-ws-demo-server/InterfaceService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions-->

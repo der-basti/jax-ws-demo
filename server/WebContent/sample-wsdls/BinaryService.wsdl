@@ -1,0 +1,140 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://samples.ws.server.io/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+	name="BinaryServiceService" targetNamespace="http://samples.ws.server.io/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://samples.ws.server.io/" elementFormDefault="unqualified"
+			targetNamespace="http://samples.ws.server.io/" version="1.0">
+			<xs:element name="getData" type="tns:getData" />
+			<xs:element name="getDataResponse" type="tns:getDataResponse" />
+			<xs:element name="getImage" type="tns:getImage" />
+			<xs:element name="getImageResponse" type="tns:getImageResponse" />
+			<xs:element name="getSouce" type="tns:getSouce" />
+			<xs:element name="getSouceResponse" type="tns:getSouceResponse" />
+			<xs:element name="getString" type="tns:getString" />
+			<xs:element name="getStringResponse" type="tns:getStringResponse" />
+			<xs:complexType name="getSouce">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="getSouceResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="xs:base64Binary" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getString">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="getStringResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getData">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="getDataResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="xs:base64Binary" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getImage">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="getImageResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="xs:base64Binary" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getString">
+		<wsdl:part element="tns:getString" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getData">
+		<wsdl:part element="tns:getData" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getImage">
+		<wsdl:part element="tns:getImage" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getStringResponse">
+		<wsdl:part element="tns:getStringResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getSouce">
+		<wsdl:part element="tns:getSouce" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getImageResponse">
+		<wsdl:part element="tns:getImageResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getSouceResponse">
+		<wsdl:part element="tns:getSouceResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getDataResponse">
+		<wsdl:part element="tns:getDataResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="BinaryService">
+		<wsdl:operation name="getSouce">
+			<wsdl:input message="tns:getSouce" name="getSouce"></wsdl:input>
+			<wsdl:output message="tns:getSouceResponse" name="getSouceResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getString">
+			<wsdl:input message="tns:getString" name="getString"></wsdl:input>
+			<wsdl:output message="tns:getStringResponse" name="getStringResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getData">
+			<wsdl:input message="tns:getData" name="getData"></wsdl:input>
+			<wsdl:output message="tns:getDataResponse" name="getDataResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getImage">
+			<wsdl:input message="tns:getImage" name="getImage"></wsdl:input>
+			<wsdl:output message="tns:getImageResponse" name="getImageResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BinaryServiceServiceSoapBinding" type="tns:BinaryService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getSouce">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getSouce">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getSouceResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getString">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getString">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getStringResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getData">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getData">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getDataResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getImage">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getImage">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getImageResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="BinaryServiceService">
+		<wsdl:port binding="tns:BinaryServiceServiceSoapBinding"
+			name="BinaryServicePort">
+			<soap:address
+				location="http://localhost:8080/jax-ws-demo-server/BinaryService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

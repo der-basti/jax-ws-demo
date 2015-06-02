@@ -7,14 +7,14 @@ public class InterfacePublisher {
 	/**
 	 * Create a Web Service Endpoint (Java SE).
 	 * 
-	 * wsgen -keep -cp . io.server.ws.samples.InterfaceService
+	 * wsgen -keep -cp ./ io.server.ws.samples.InterfaceService
 	 * 
 	 * generate GetHelloWorldAsString and GetHelloWorldAsStringResponse
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Endpoint.publish("http://localhost:8181/ws/echoComplex",
-				new EchoComplexService());
+		Endpoint.publish("http://localhost:8181/ws/InterfaceService",
+				new InterfaceServiceImpl());
 	}
 }

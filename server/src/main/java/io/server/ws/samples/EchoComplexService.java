@@ -19,9 +19,6 @@ import javax.xml.ws.ResponseWrapper;
  * 
  */
 @WebService(name = "EchoComplexService", serviceName = "EchoComplexService", portName = "EchoComplexServicePort", targetNamespace = "http://samples.ws.server.io/")
-// serviceName = "EchoComplexServiceService"
-// endpointInterface = "io.server.ws.samples.EchoComplexService"
-// wsdlLocation="WEB-INF/wsdl/EchoComplexService.wsdl"
 @SOAPBinding(style = Style.DOCUMENT, use = Use.LITERAL, parameterStyle = ParameterStyle.WRAPPED)
 public class EchoComplexService {
 
@@ -30,7 +27,7 @@ public class EchoComplexService {
 	@ResponseWrapper(targetNamespace = "http://samples.ws.server.io/", className = "java.lang.String")
 	@WebResult(name = "return", targetNamespace = "http://samples.ws.server.io/")
 	public String sayHello(
-			final @WebParam(name = "name", mode = Mode.IN, targetNamespace = "http://samples.ws.server.io/") String name) {
+			final @WebParam(name = "arg", mode = Mode.IN, targetNamespace = "http://samples.ws.server.io/") String name) {
 		return "Hello " + name;
 	}
 }

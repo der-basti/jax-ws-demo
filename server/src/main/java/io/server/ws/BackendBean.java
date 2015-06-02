@@ -194,7 +194,6 @@ public class BackendBean implements Serializable {
 		if (app == null) {
 			return ReturnCode.OBJECT_NOT_FOUND;
 		}
-		// app.setImage(new ImageIcon(image).getImage());
 		app.setImage(image);
 		return ReturnCode.SUCCESS;
 	}

@@ -1,0 +1,104 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://samples.ws.server.io/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+	name="FaultServiceService" targetNamespace="http://samples.ws.server.io/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://samples.ws.server.io/" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified" targetNamespace="http://samples.ws.server.io/">
+			<xs:element name="e1" type="tns:e1" />
+			<xs:element name="e1Response" type="tns:e1Response" />
+			<xs:element name="e2" type="tns:e2" />
+			<xs:element name="e2Response" type="tns:e2Response" />
+			<xs:complexType name="e1">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="e1Response">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="e2">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="e2Response">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="FaultException">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="message" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="Exception" type="tns:Exception" />
+			<xs:complexType name="Exception">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="message" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="FaultException" nillable="true"
+				type="tns:FaultException" />
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="e1Response">
+		<wsdl:part element="tns:e1Response" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="Exception">
+		<wsdl:part element="tns:Exception" name="Exception"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="e1">
+		<wsdl:part element="tns:e1" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="e2">
+		<wsdl:part element="tns:e2" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="FaultMy">
+		<wsdl:part element="tns:FaultException" name="FaultMy"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="e2Response">
+		<wsdl:part element="tns:e2Response" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="FaultService">
+		<wsdl:operation name="e1">
+			<wsdl:input message="tns:e1" name="e1"></wsdl:input>
+			<wsdl:output message="tns:e1Response" name="e1Response"></wsdl:output>
+			<wsdl:fault message="tns:Exception" name="Exception"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="e2">
+			<wsdl:input message="tns:e2" name="e2"></wsdl:input>
+			<wsdl:output message="tns:e2Response" name="e2Response"></wsdl:output>
+			<wsdl:fault message="tns:FaultMy" name="FaultMy"></wsdl:fault>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="FaultServiceServiceSoapBinding" type="tns:FaultService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="e1">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="e1">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="e1Response">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="Exception">
+				<soap:fault name="Exception" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="e2">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="e2">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="e2Response">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="FaultMy">
+				<soap:fault name="FaultMy" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="FaultServiceService">
+		<wsdl:port binding="tns:FaultServiceServiceSoapBinding"
+			name="FaultServicePort">
+			<soap:address location="http://localhost:8080/jax-ws-demo-server/FaultService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

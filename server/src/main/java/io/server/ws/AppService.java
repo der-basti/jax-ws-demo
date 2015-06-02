@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 @Stateless
 @WebService
 @MTOM
-// @HandlerChain(file = "/handlers.xml") // @BindingType(value = "URI")
 public class AppService {
 
 	private Logger log = LoggerFactory.getLogger(AppService.class);
@@ -62,11 +61,7 @@ public class AppService {
 	 */
 	public App getAppById(final @WebParam(name = "id") long id) {
 		log("getAppById", id);
-		final App app = this.backendBean.get(id);
-		if (app != null) {
-			return app;
-		}
-		return null;
+		return this.backendBean.get(id);
 	}
 
 	/**

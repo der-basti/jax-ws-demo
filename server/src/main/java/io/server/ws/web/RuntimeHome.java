@@ -1,13 +1,10 @@
 package io.server.ws.web;
 
 import io.server.ws.BackendBean;
-import io.server.ws.model.App;
-import io.server.ws.model.ReturnCode;
 
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -33,21 +30,12 @@ public class RuntimeHome implements Serializable {
 		this.backendBean.init();
 	}
 
-	@SuppressWarnings("unused")
-	private void sample() {
-		List<App> appList = this.backendBean.findAll();
-		App app = this.backendBean.get(1L);
-		ReturnCode rc = this.backendBean.delete(2L);
-		List<App> findList = this.backendBean.find("ChroFox");
-		// byte[] barray = this.backendBean.getBinary(1L);
-		// 4L, "Go!", "The Game", 0.25, activated, new Date(),
-		// this.backendBean.update(4L, true, "The Game Go", "new description",
-		// 99.99d);
-		appList = this.backendBean.findAll();
+	public String getActiveAppCount() {
+		return String.valueOf(this.backendBean.findAll().size());
 	}
 
-	public String getAppCount() {
-		return String.valueOf(this.backendBean.findAll().size());
+	public String getInactiveAppCount() {
+		return String.valueOf(this.backendBean.findAllInactivated().size());
 	}
 
 	public String resetModel() {

@@ -29,15 +29,12 @@
 	</servlet-mapping>
 
 	<session-config>
-		<session-timeout>10</session-timeout>
+		<session-timeout>30</session-timeout>
 	</session-config>
 
-	<!-- security roles used by this web application -->
-	<!--security-role> <role-name>FOO</role-name> </security-role -->
-
-	<!--security-constraint> <web-resource-collection> <web-resource-name>Https 
-		entire WebApp</web-resource-name> <url-pattern>/*</url-pattern> </web-resource-collection> 
-		< No Auth Contraint! > <user-data-constraint> <transport-guarantee>CONFIDENTIAL</transport-guarantee> 
+	<!--security-role> <role-name>wsuser</role-name> </security-role> <security-constraint> 
+		<web-resource-collection> <web-resource-name>Https</web-resource-name> <url-pattern>/CalculatorService*</url-pattern> 
+		</web-resource-collection> <user-data-constraint> <transport-guarantee>CONFIDENTIAL</transport-guarantee> 
 		</user-data-constraint> </security-constraint -->
 
 	<welcome-file-list>
