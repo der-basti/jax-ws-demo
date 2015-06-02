@@ -1,0 +1,308 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.server.io/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+	name="AppServiceService" targetNamespace="http://ws.server.io/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://ws.server.io/" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified" targetNamespace="http://ws.server.io/">
+			<xs:element name="delete" type="tns:delete" />
+			<xs:element name="deleteResponse" type="tns:deleteResponse" />
+			<xs:element name="downloadImage" type="tns:downloadImage" />
+			<xs:element name="downloadImageResponse" type="tns:downloadImageResponse" />
+			<xs:element name="find" type="tns:find" />
+			<xs:element name="findResponse" type="tns:findResponse" />
+			<xs:element name="getAppById" type="tns:getAppById" />
+			<xs:element name="getAppByIdResponse" type="tns:getAppByIdResponse" />
+			<xs:element name="listAll" type="tns:listAll" />
+			<xs:element name="listAllInactivated" type="tns:listAllInactivated" />
+			<xs:element name="listAllInactivatedResponse" type="tns:listAllInactivatedResponse" />
+			<xs:element name="listAllResponse" type="tns:listAllResponse" />
+			<xs:element name="update" type="tns:update" />
+			<xs:element name="updateResponse" type="tns:updateResponse" />
+			<xs:element name="uploadImage" type="tns:uploadImage" />
+			<xs:element name="uploadImageResponse" type="tns:uploadImageResponse" />
+			<xs:complexType name="delete">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="deleteResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="tns:returnCode" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="downloadImage">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="downloadImageResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="xs:base64Binary" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="listAllInactivated">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="listAllInactivatedResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="return"
+						type="tns:app" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="app">
+				<xs:sequence>
+					<xs:element name="activated" type="xs:boolean" />
+					<xs:element minOccurs="0" name="addDate" type="xs:dateTime" />
+					<xs:element minOccurs="0" name="appUrl" type="xs:string" />
+					<xs:element minOccurs="0" name="checksum" type="xs:string" />
+					<xs:element minOccurs="0" name="description" type="xs:string" />
+					<xs:element minOccurs="0" name="image" type="xs:base64Binary" />
+					<xs:element minOccurs="0" name="name" type="xs:string" />
+					<xs:element minOccurs="0" name="price" type="xs:double" />
+				</xs:sequence>
+				<xs:attribute name="id" type="xs:long" use="required" />
+			</xs:complexType>
+			<xs:complexType name="getAppById">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getAppByIdResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="tns:app" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="update">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="activated" type="xs:boolean" />
+					<xs:element minOccurs="0" name="name" type="xs:string" />
+					<xs:element minOccurs="0" name="description" type="xs:string" />
+					<xs:element minOccurs="0" name="price" type="xs:double" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="updateResponse">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="listAll">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="listAllResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="return"
+						type="tns:app" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="uploadImage">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="image" type="xs:base64Binary" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="uploadImageResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="tns:returnCode" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="find">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="name" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="findResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="return"
+						type="tns:app" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="returnCode">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="SUCCESS" />
+					<xs:enumeration value="OBJECT_NOT_FOUND" />
+					<xs:enumeration value="INTERNAL_ERROR" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="Exception" type="tns:Exception" />
+			<xs:complexType name="Exception">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="message" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="delete">
+		<wsdl:part element="tns:delete" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="listAllInactivated">
+		<wsdl:part element="tns:listAllInactivated" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="Exception">
+		<wsdl:part element="tns:Exception" name="Exception"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAppById">
+		<wsdl:part element="tns:getAppById" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="update">
+		<wsdl:part element="tns:update" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findResponse">
+		<wsdl:part element="tns:findResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="listAllResponse">
+		<wsdl:part element="tns:listAllResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAppByIdResponse">
+		<wsdl:part element="tns:getAppByIdResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="uploadImageResponse">
+		<wsdl:part element="tns:uploadImageResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="downloadImage">
+		<wsdl:part element="tns:downloadImage" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateResponse">
+		<wsdl:part element="tns:updateResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="listAll">
+		<wsdl:part element="tns:listAll" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="uploadImage">
+		<wsdl:part element="tns:uploadImage" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteResponse">
+		<wsdl:part element="tns:deleteResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="find">
+		<wsdl:part element="tns:find" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="downloadImageResponse">
+		<wsdl:part element="tns:downloadImageResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="listAllInactivatedResponse">
+		<wsdl:part element="tns:listAllInactivatedResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="AppService">
+		<wsdl:operation name="delete">
+			<wsdl:input message="tns:delete" name="delete"></wsdl:input>
+			<wsdl:output message="tns:deleteResponse" name="deleteResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="downloadImage">
+			<wsdl:input message="tns:downloadImage" name="downloadImage"></wsdl:input>
+			<wsdl:output message="tns:downloadImageResponse" name="downloadImageResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="listAllInactivated">
+			<wsdl:input message="tns:listAllInactivated" name="listAllInactivated"></wsdl:input>
+			<wsdl:output message="tns:listAllInactivatedResponse"
+				name="listAllInactivatedResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAppById">
+			<wsdl:input message="tns:getAppById" name="getAppById"></wsdl:input>
+			<wsdl:output message="tns:getAppByIdResponse" name="getAppByIdResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="update">
+			<wsdl:input message="tns:update" name="update"></wsdl:input>
+			<wsdl:output message="tns:updateResponse" name="updateResponse"></wsdl:output>
+			<wsdl:fault message="tns:Exception" name="Exception"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="listAll">
+			<wsdl:input message="tns:listAll" name="listAll"></wsdl:input>
+			<wsdl:output message="tns:listAllResponse" name="listAllResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="uploadImage">
+			<wsdl:input message="tns:uploadImage" name="uploadImage"></wsdl:input>
+			<wsdl:output message="tns:uploadImageResponse" name="uploadImageResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="find">
+			<wsdl:input message="tns:find" name="find"></wsdl:input>
+			<wsdl:output message="tns:findResponse" name="findResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="AppServiceServiceSoapBinding" type="tns:AppService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="delete">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="delete">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="deleteResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="downloadImage">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="downloadImage">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="downloadImageResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="listAllInactivated">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="listAllInactivated">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="listAllInactivatedResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAppById">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getAppById">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getAppByIdResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="update">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="update">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="updateResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="Exception">
+				<soap:fault name="Exception" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="listAll">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="listAll">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="listAllResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="uploadImage">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="uploadImage">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="uploadImageResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="find">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="find">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="findResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="AppServiceService">
+		<wsdl:port binding="tns:AppServiceServiceSoapBinding" name="AppServicePort">
+			<soap:address location="http://localhost:8080/jax-ws-demo-server/AppService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
