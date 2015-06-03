@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Secure basic Calculator Service.
+ * Basic Calculator Service.
  * 
  * @author s7n
  *
